@@ -43,12 +43,11 @@ echo "configuring tmux"
 echo "installing tpm"
 mkdir -p ~/.tmux/plugins
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
 echo "installing tpm plugins"
 ~/.tmux/plugins/tpm/scripts/install_plugins.sh
 
-echo "installing font-hack"
-brew tap homebrew/cask-fonts
-brew install font-hack
+./setup_mac_terminal.sh
 
 echo "tmux is ready"
 
