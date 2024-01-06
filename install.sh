@@ -23,6 +23,33 @@ ensure_brew_installed nvim
 ensure_brew_installed tree
 ensure_brew_installed htop
 
-echo "all tools installed"
+echo "all tools are installed"
 
 bash ./update_config.sh
+
+#
+#  fish
+#
+echo "configuring fish"
+chsh -s $(which fish)
+echo "set fish as default shell"
+echo "fish is ready"
+
+#
+# tmux
+#
+echo "configuring tmux"
+
+echo "installing tpm"
+mkdir -p ~/.tmux/plugins
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+echo "installing tpm plugins"
+~/.tmux/plugins/tpm/scripts/install_plugins.sh
+
+echo "installing font-hack"
+brew tap homebrew/cask-fonts
+brew install font-hack
+
+echo "tmux is ready"
+
+
