@@ -41,13 +41,19 @@ P.S. You can delete this when you're done too. It's your config now :)
 -- Set <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
-vim.g.mapleader = ' '
+vim.g.mapleader      = ' '
 vim.g.maplocalleader = ' '
+
+-- keymap for  vim-visual-multi
+vim.g.VM_maps        = {
+  ["Add Cursor Down"] = '<C-j>',
+  ["Add Cursor Up"]   = '<C-k>',
+}
 
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    https://github.com/folke/lazy.nvim
 --    `:help lazy.nvim.txt` for more info
-local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
+local lazypath       = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system {
     'git',
@@ -326,14 +332,14 @@ vim.keymap.set('v', 'p', 'P', { desc = 'overwrite without yank' })
 vim.keymap.set('n', 'd', '"_d', { desc = 'delete without yank' })
 vim.keymap.set('v', 'd', '"_d', { desc = 'delete without yank' })
 
--- Ctrl+h to stop searching
-vim.keymap.set('n', '<C-h>', function()
+-- stop searching
+vim.keymap.set('n', '<leader>vh', function()
   if vim.o.buftype == 'quickfix' then
     return "<CR>"
   else
     return ":nohlsearch<CR>"
   end
-end, { expr = true, replace_keycodes = true, desc = 'stop search highlight' })
+end, { expr = true, replace_keycodes = true, desc = 'toggle search highlight' })
 
 -- fast toggle buffers
 vim.keymap.set('n', '<leader><leader>', '<c-^>', { desc = 'fast toggle buffer' })
