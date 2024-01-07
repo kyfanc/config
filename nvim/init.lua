@@ -363,6 +363,14 @@ vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open float
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 vim.keymap.set('n', '<leader>df', vim.diagnostic.setqflist, { desc = 'Open quick fix list' })
 
+-- Tab navigate
+vim.keymap.set('n', '<leader>[', function()
+  return ':tabrewind<CR>'
+end, { expr = true, replace_keycodes = true, desc = 'Previous tab' })
+vim.keymap.set('n', '<leader>]', function()
+  return ':tabnext<CR>'
+end, { expr = true, replace_keycodes = true, desc = 'Next tab' })
+
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
