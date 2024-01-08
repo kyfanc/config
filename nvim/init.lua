@@ -268,6 +268,18 @@ require('lazy').setup({
   'tpope/vim-abolish',
 
   'vim-test/vim-test',
+
+  {
+    "karb94/neoscroll.nvim",
+    config = function()
+      require('neoscroll').setup {}
+      local t = {}
+      -- Syntax: t[keys] = {function, {function arguments}}
+      t['K'] = { 'scroll', { '-vim.wo.scroll', 'true', '100' } }
+      t['J'] = { 'scroll', { 'vim.wo.scroll', 'true', '100' } }
+      require('neoscroll.config').set_mappings(t)
+    end
+  }
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
   --       Uncomment any of the lines below to enable them.
@@ -354,8 +366,8 @@ vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = tr
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 -- scoll page
-vim.keymap.set('n', 'K', '<C-u>', { desc = 'scroll page up' })
-vim.keymap.set('n', 'J', '<C-d>', { desc = 'scroll page down' })
+-- vim.keymap.set('n', 'K', '<C-u>', { desc = 'scroll page up' })
+-- vim.keymap.set('n', 'J', '<C-d>', { desc = 'scroll page down' })
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>db', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
