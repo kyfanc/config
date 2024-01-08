@@ -14,5 +14,5 @@ echo "updating configs"
 link_conf ./tmux/.tmux.conf ~/.tmux.conf
 link_conf ./fish/config.fish ~/.config/fish/config.fish
 echo "linking $(pwd)/nvim as ~/.config/nvim"
-ln -s $(pwd)/nvim ~/.config/nvim
+ln -sf $(pwd)/nvim ~/.config/nvim
 echo "all configs are updated"
