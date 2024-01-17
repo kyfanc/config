@@ -1,0 +1,25 @@
+# rust
+[[language]]
+name = "rust"
+
+[language.config]
+cachePriming.enable = false
+diagnostics.experimental.enable = true
+
+[language-server.rust-analyzer.config]
+cargo.features = "all"
+rust-analyzer.check.command = "clippy"
+
+# python
+# pip3 install python-lsp-server[all] python-lsp-ruff black
+[[language]]
+name = "python"
+auto-format = true
+
+# go
+# install lsp
+# go get golang.org/x/tools/gopls@latest
+# go get github.com/go-delve/delve/cmd/dlv@latest
+[[language]]
+name = "go"
+auto-format = true
