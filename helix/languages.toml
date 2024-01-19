@@ -2,10 +2,6 @@
 [[language]]
 name = "rust"
 
-[language.config]
-cachePriming.enable = false
-diagnostics.experimental.enable = true
-
 [language-server.rust-analyzer.config]
 cargo.features = "all"
 rust-analyzer.check.command = "clippy"
