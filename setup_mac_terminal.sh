@@ -19,4 +19,6 @@ tell application "Terminal"
 end tell
 EOF
 
+echo "! Reminder: remember to import and configure the profile"
+
 echo "terminal app is configured"

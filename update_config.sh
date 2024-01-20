@@ -17,4 +17,6 @@ echo "linking $(pwd)/nvim as ~/.config/nvim"
 ln -sf $(pwd)/nvim ~/.config/nvim
 echo "linking $(pwd)/helix as ~/.config/helix"
 ln -sf $(pwd)/helix ~/.config/helix
+echo "linking $(pwd)/zellij as ~/.config/zellij"
+ln -sf $(pwd)/zellij ~/.config/zellij 
 echo "all configs are updated"

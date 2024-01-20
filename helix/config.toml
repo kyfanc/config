@@ -1,7 +1,6 @@
 theme = "gruvbox_dark_hard"
 
 [editor]
-true-color = true
 auto-format = true
 bufferline = "multiple"
 line-number = "relative"
