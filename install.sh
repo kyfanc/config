@@ -34,7 +34,9 @@ chsh -s $(which fish)
 echo "set fish as default shell"
 echo "fish is ready"
 
-./setup_mac_terminal.sh
+echo "installing font-hack"
+brew tap homebrew/cask-fonts
+brew install font-hack
 
 echo "done"
 

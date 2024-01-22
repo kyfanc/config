@@ -76,7 +76,7 @@
     "Blue Component" : 0.63137259999999995,
     "Green Component" : 0.76862746000000004
   },
-  "Working Directory" : "\/Users\/kyfan",
+  "Working Directory" : "~\/",
   "Blinking Cursor" : false,
   "Disable Window Resizing" : true,
   "Sync Title" : false,
@@ -312,7 +312,7 @@
     "Blue Component" : 0.4862745,
     "Green Component" : 0.75294119999999998
   },
-  "Name" : "Default",
+  "Name" : "Custom",
   "Cursor Text Color" : {
     "Red Component" : 0.11372549,
     "Color Space" : "sRGB",

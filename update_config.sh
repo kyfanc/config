@@ -11,7 +11,7 @@ link_conf ()
 }
 
 echo "updating configs"
-link_conf ./tmux/.tmux.conf ~/.tmux.conf
+echo "linking $(pwd)/fish/config.fish as ~/.config/fish/config.fish"
 link_conf ./fish/config.fish ~/.config/fish/config.fish
 echo "linking $(pwd)/nvim as ~/.config/nvim"
 ln -sf $(pwd)/nvim ~/.config/nvim
