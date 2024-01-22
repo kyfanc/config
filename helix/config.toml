@@ -67,7 +67,7 @@ p = "paste_clipboard_after"
 P = "paste_clipboard_before"
 R = "replace_selections_with_clipboard"
 esc = ["collapse_selection", "keep_primary_selection"]
-x = "delete_selection"
+x = ["yank_to_clipboard", "delete_selection"]
 s = ["select_all", "select_regex"]
 "?" = ["select_all", "search"]
 
@@ -76,6 +76,7 @@ s = ["select_all", "select_regex"]
 "^" = "goto_first_nonwhitespace"
 G = "goto_file_end"
 "%" = "match_brackets"
+x = ["yank_to_clipboard", "delete_selection"]
 y = "yank_to_clipboard"
 p = "paste_clipboard_after"
 P = "paste_clipboard_before"
