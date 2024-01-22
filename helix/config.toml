@@ -65,6 +65,7 @@ G = "goto_file_end"
 y = "yank_to_clipboard"
 p = "paste_clipboard_after"
 P = "paste_clipboard_before"
+R = "replace_selections_with_clipboard"
 esc = ["collapse_selection", "keep_primary_selection"]
 x = "delete_selection"
 s = ["select_all", "select_regex"]
@@ -78,6 +79,7 @@ G = "goto_file_end"
 y = "yank_to_clipboard"
 p = "paste_clipboard_after"
 P = "paste_clipboard_before"
+R = "replace_selections_with_clipboard"
 esc = ["collapse_selection", "keep_primary_selection", "normal_mode"]
 
 [keys.normal.space]
