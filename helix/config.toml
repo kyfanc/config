@@ -51,6 +51,7 @@ display-messages = true
 display-inlay-hints = true
 
 [keys.normal]
+C-a = "select_all"
 C-j = "copy_selection_on_next_line"
 C-k = "copy_selection_on_prev_line"
 C-h = "jump_view_left"
@@ -68,7 +69,7 @@ P = "paste_clipboard_before"
 R = "replace_selections_with_clipboard"
 esc = ["collapse_selection", "keep_primary_selection"]
 x = ["yank_to_clipboard", "delete_selection"]
-s = ["select_all", "select_regex"]
+s = "select_regex"
 "?" = ["select_all", "search"]
 
 [keys.select]
