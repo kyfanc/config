@@ -5,6 +5,9 @@ name = "rust"
 [language-server.rust-analyzer.config]
 cargo.features = "all"
 rust-analyzer.check.command = "clippy"
+# rust-analyzer.inlayHints.typeHints.enable= false
+# rust-analyzer.inlayHints.parameterHints.enable= false
+# rust-analyzer.inlayHints.chainingHints.enable= false
 
 # python
 # pip3 install python-lsp-server[all] python-lsp-ruff black

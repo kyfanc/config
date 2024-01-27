@@ -19,6 +19,7 @@ ensure_brew_installed() {
 
 ensure_brew_installed fish
 ensure_brew_installed zellij
+ensure_brew_installed starship
 ensure_brew_installed tree
 ensure_brew_installed htop
 
@@ -34,9 +35,10 @@ chsh -s $(which fish)
 echo "set fish as default shell"
 echo "fish is ready"
 
-echo "installing font-hack"
+echo "installing font"
 brew tap homebrew/cask-fonts
-brew install font-hack
+brew install --cask font-fira-code-nerd-font
+ehco "!! ACTION_ITEM: import custom.iterm.json profile to iterm2"
 
 echo "done"
 

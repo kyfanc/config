@@ -2,7 +2,7 @@
 
 set -e
 
-link_conf ()
+link_file ()
 {
 	src=$1
 	dst=$2
@@ -10,13 +10,20 @@ link_conf ()
 	ln -f "$src" "$dst"
 }
 
+link_folder()
+{
+	src=$1
+	dst=$2
+	echo "linking $src as $dst"
+	ln -sf "$src" "$dst"
+}
+
 echo "updating configs"
-echo "linking $(pwd)/fish/config.fish as ~/.config/fish/config.fish"
-link_conf ./fish/config.fish ~/.config/fish/config.fish
-echo "linking $(pwd)/nvim as ~/.config/nvim"
-ln -sf $(pwd)/nvim ~/.config/nvim
-echo "linking $(pwd)/helix as ~/.config/helix"
-ln -sf $(pwd)/helix ~/.config/helix
-echo "linking $(pwd)/zellij as ~/.config/zellij"
-ln -sf $(pwd)/zellij ~/.config/zellij 
+mkdir -p ~/.config
+
+link_file $(pwd)/fish/config.fish ~/.config/fish/config.fish
+link_file $(pwd)/starship/starship.toml ~/.config/starship.toml
+link_folder $(pwd)/helix ~/.config/
+link_folder $(pwd)/zellij ~/.config/
+
 echo "all configs are updated"
