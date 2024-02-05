@@ -22,3 +22,45 @@ auto-format = true
 [[language]]
 name = "go"
 auto-format = true
+
+# helm
+# config file type detection and remap to gotmpl
+# download https://github.com/helix-editor/helix/blob/d02de7c9fab9bd72ccd3998327d6eb420409277b/runtime/queries/gotmpl/highlights.scm 
+# as ~/.config/helix/runtime/helm/hightlights.scm
+[language-server.helm_ls]
+command = "helm_ls"
+args = ["serve"] 
+
+[[language]]
+name = "helm"
+grammar = "gotmpl"
+scope = "source.helm"
+injection-regex = "helm"
+file-types = ["tpl", "templates/*.tpl", {suffix = "templates/tpl"}]
+roots = ["Chart.yaml"]
+comment-token = "#"
+indent = { tab-width = 2, unit = "  " }
+language-servers = [ 
+  "helm_ls"
+]
+
+[[grammar]]
+name = "helm"
+source = { git = "https://github.com/dannylongeuay/tree-sitter-go-template", rev = "395a33e08e69f4155156f0b90138a6c86764c979" }
+
+# groovy (mainly for Jenkinsfile)
+# download https://github.com/helix-editor/helix/blob/d02de7c9fab9bd72ccd3998327d6eb420409277b/runtime/queries/groovy/highlights.scm
+# as ~/.config/helix/runtime/groovy/hightlights.scm
+[[language]]
+name = "groovy"
+language-id = "groovy"
+scope = "source.groovy"
+file-types = ["groovy", "Jenkinsfile", "jenkinsfile"]
+shebangs = ["groovy"]
+roots = []
+comment-token = "//"
+indent = { tab-width = 2, unit = "  " }
+
+[[grammar]]
+name = "groovy"
+source = { git = "https://github.com/Decodetalkers/tree-sitter-groovy", rev = "7e023227f46fee428b16a0288eeb0f65ee2523ec" }
