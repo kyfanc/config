@@ -64,3 +64,26 @@ indent = { tab-width = 2, unit = "  " }
 [[grammar]]
 name = "groovy"
 source = { git = "https://github.com/Decodetalkers/tree-sitter-groovy", rev = "7e023227f46fee428b16a0288eeb0f65ee2523ec" }
+
+[[language]]
+name = "html"
+formatter = { command = 'prettier', args = ["--parser", "html"] }
+
+[[language]]
+name = "json"
+formatter = { command = 'prettier', args = ["--parser", "json"] }
+
+[[language]]
+name = "css"
+formatter = { command = 'prettier', args = ["--parser", "css"] }
+
+[[language]]
+name = "javascript"
+formatter = { command = 'prettier', args = ["--parser", "typescript"] }
+auto-format = true
+
+[[language]]
+name = "typescript"
+formatter = { command = 'prettier', args = ["--parser", "typescript"] }
+auto-format = true
+
