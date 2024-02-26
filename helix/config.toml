@@ -87,9 +87,24 @@ esc = ["collapse_selection", "keep_primary_selection", "normal_mode"]
 [keys.normal.space]
 "[" = "goto_previous_buffer" 
 "]" = "goto_next_buffer"
+"=" = [":format", "select_all", ":pipe git stripspace"]
 E = "workspace_diagnostics_picker"
 P = "command_palette"
 d = "hover"
 e = "diagnostics_picker"
 p = "file_picker"
 space = "goto_last_accessed_file"
+
+[keys.normal.space.b]
+"q" = ":buffer-close"
+"Q" = ":buffer-close!"
+"p" = "buffer_picker"
+"space" = "goto_previous_buffer"
+"c" = ":buffer-close-all"
+"C" = ":buffer-close-all!"
+"k" = ":buffer-close-others"
+"K" = ":buffer-close-others!"
+"[" = ":buffer-previous"
+"]" = ":buffer-next"
+"r" = ":reload"
+"R" = ":reload-all"
