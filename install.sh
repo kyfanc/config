@@ -23,6 +23,14 @@ ensure_brew_installed starship
 ensure_brew_installed tree
 ensure_brew_installed htop
 
+#
+# zellij plugins
+#
+echo "downloading zellij plugins"
+curl -L https://github.com/dj95/zjstatus/releases/download/v0.13.0/zjstatus.wasm > zellij/plugins/zjstatus.wasm
+echo "zellij plugins are downloaded"
+echo "!! ACTION_ITEM: might require granting permission on first launch!"
+
 echo "all tools are installed"
 
 bash ./update_config.sh
