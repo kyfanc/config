@@ -113,3 +113,8 @@ space = "goto_last_accessed_file"
 "r" = ":reload"
 "R" = ":reload-all"
 "n" = ":new"
+
+[keys.normal.space.o]
+"l" = ":open ~/.config/helix/languages.toml"
+"c" = ":open ~/.config/helix/config.toml"
+"z" = ":open ~/.config/zellij/config.kdl"
