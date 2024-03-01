@@ -52,8 +52,10 @@ display-inlay-hints = true
 
 [keys.normal]
 C-a = "select_all"
-C-k = ["extend_to_line_bounds", "delete_selection", "move_line_up", "paste_before"]
-C-j = ["extend_to_line_bounds", "delete_selection", "paste_after"]
+C-k = "copy_selection_on_prev_line"
+C-j = "copy_selection_on_next_line"
+A-k = ["extend_to_line_bounds", "delete_selection", "move_line_up", "paste_before"]
+A-j = ["extend_to_line_bounds", "delete_selection", "paste_after"]
 C-h = "jump_view_left"
 C-l = "jump_view_right"
 C-v = "vsplit"
@@ -85,8 +87,8 @@ R = "replace_selections_with_clipboard"
 esc = ["collapse_selection", "keep_primary_selection", "normal_mode"]
 J = "half_page_down"
 K = "half_page_up"
-C-k = ["extend_to_line_bounds", "delete_selection", "move_line_up", "paste_before"]
-C-j = ["extend_to_line_bounds", "delete_selection", "paste_after"]
+A-k = ["extend_to_line_bounds", "delete_selection", "move_line_up", "paste_before"]
+A-j = ["extend_to_line_bounds", "delete_selection", "paste_after"]
 
 [keys.normal.space]
 "[" = "goto_previous_buffer" 
