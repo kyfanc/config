@@ -101,6 +101,7 @@ e = "diagnostics_picker"
 p = "file_picker"
 space = "goto_last_accessed_file"
 
+# buffer
 [keys.normal.space.b]
 "q" = ":buffer-close"
 "Q" = ":buffer-close!"
@@ -116,7 +117,17 @@ space = "goto_last_accessed_file"
 "R" = ":reload-all"
 "n" = ":new"
 
+# open
 [keys.normal.space.o]
 "l" = ":open ~/.config/helix/languages.toml"
 "c" = ":open ~/.config/helix/config.toml"
 "z" = ":open ~/.config/zellij/config.kdl"
+"f" = ":open ~/.config/fish/config.fish"
+
+# toggle
+[keys.normal.space.t]
+"a" = ":toggle auto-completion"
+"f" = ":toggle auto-format"
+"h" = ":toggle lsp.display-inlay-hints"
+"l" = ":toggle lsp.enabled"
+"w" = ":toggle soft-wrap.enable"
