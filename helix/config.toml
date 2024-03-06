@@ -131,3 +131,11 @@ space = "goto_last_accessed_file"
 "h" = ":toggle lsp.display-inlay-hints"
 "l" = ":toggle lsp.enabled"
 "w" = ":toggle soft-wrap.enable"
+
+# llm
+[keys.normal.space.m]
+"s" = ["yank_to_clipboard", ":sh zellij run --floating -- fish -c 'ollama run mistral \"$(pbpaste | bun run ~/.config/helix/llm.ts --prompt-only --prompt summarizeCode)\" | bat -pp -l md'"]
+"d" = ["yank_to_clipboard", ":sh zellij run --floating -- fish -c 'ollama run mistral \"$(pbpaste | bun run ~/.config/helix/llm.ts --prompt-only --prompt diagnoseCode)\" | bat -pp -l md'"]
+[keys.select.space.m]
+"s" = ["yank_to_clipboard", ":sh zellij run --floating -- fish -c 'ollama run mistral \"$(pbpaste | bun run ~/.config/helix/llm.ts --prompt-only --prompt summarizeCode)\" | bat -pp -l md'"]
+"d" = ["yank_to_clipboard", ":sh zellij run --floating -- fish -c 'ollama run mistral \"$(pbpaste | bun run ~/.config/helix/llm.ts --prompt-only --prompt diagnoseCode)\" | bat -pp -l md'"]
