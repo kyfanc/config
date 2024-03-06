@@ -22,7 +22,11 @@ ensure_brew_installed zellij
 ensure_brew_installed starship
 ensure_brew_installed tree
 ensure_brew_installed htop
-
+# for recording terminal
+ensure_brew_installed asciinema
+# for converting recording to gif
+ensure_brew_installed agg
+ 
 #
 # zellij plugins
 #
