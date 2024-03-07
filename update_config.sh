@@ -22,6 +22,7 @@ echo "updating configs"
 mkdir -p ~/.config
 
 link_file $(pwd)/fish/config.fish ~/.config/fish/config.fish
+link_folder $(pwd)/functions ~/.config/fish/functions
 link_file $(pwd)/starship/starship.toml ~/.config/starship.toml
 link_folder $(pwd)/helix ~/.config/
 link_folder $(pwd)/zellij ~/.config/
