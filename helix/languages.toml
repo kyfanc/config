@@ -5,9 +5,6 @@ name = "rust"
 [language-server.rust-analyzer.config]
 cargo.features = "all"
 rust-analyzer.check.command = "clippy"
-# rust-analyzer.inlayHints.typeHints.enable= false
-# rust-analyzer.inlayHints.parameterHints.enable= false
-# rust-analyzer.inlayHints.chainingHints.enable= false
 
 # python
 # pip3 install python-lsp-server[all] python-lsp-ruff black
@@ -36,7 +33,7 @@ name = "helm"
 grammar = "gotmpl"
 scope = "source.helm"
 injection-regex = "helm"
-file-types = ["tpl", "templates/*.tpl", {suffix = "templates/tpl"}]
+file-types = ["tpl", "templates/*.tpl"]
 roots = ["Chart.yaml"]
 comment-token = "#"
 indent = { tab-width = 2, unit = "  " }
