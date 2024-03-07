@@ -21,6 +21,7 @@ link_folder()
 echo "updating configs"
 mkdir -p ~/.config
 
+link_file $(pwd)/.gitconfig ~/.gitconfig
 link_file $(pwd)/fish/config.fish ~/.config/fish/config.fish
 link_folder $(pwd)/functions ~/.config/fish/functions
 link_file $(pwd)/starship/starship.toml ~/.config/starship.toml
