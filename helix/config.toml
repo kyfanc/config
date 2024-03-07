@@ -98,7 +98,9 @@ E = "workspace_diagnostics_picker"
 P = "command_palette"
 d = "hover"
 e = "diagnostics_picker"
-p = "file_picker"
+f = "file_picker_in_current_directory"
+F = "file_picker"
+p = "last_picker"
 space = "goto_last_accessed_file"
 
 # buffer
