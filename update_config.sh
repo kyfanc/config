@@ -28,5 +28,6 @@ link_file $(pwd)/starship/starship.toml ~/.config/starship.toml
 link_folder $(pwd)/helix ~/.config/
 link_folder $(pwd)/zellij ~/.config/
 link_folder $(pwd)/gitui ~/.config/
+link_folder $(pwd)/bat ~/.config/
 
 echo "all configs are updated"
