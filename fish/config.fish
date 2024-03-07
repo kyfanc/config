@@ -8,9 +8,8 @@ fish_add_path ~/.cargo/bin
 set -g fish_key_bindings fish_vi_key_bindings
 
 # editor
-set -U EDITOR "hx"
-# short cut
-alias e="$EDITOR"
+set -Ux EDITOR "hx"
+set -Ux VISUAL "hx"
 
 if status is-interactive
     # Commands to run in interactive sessions can go here
