@@ -22,6 +22,8 @@ ensure_brew_installed zellij
 ensure_brew_installed starship
 ensure_brew_installed tree
 ensure_brew_installed htop
+ensure_brew_installed git-delta
+ensure_brew_installed bat
 # for recording terminal
 ensure_brew_installed asciinema
 # for converting recording to gif
