@@ -56,5 +56,10 @@ brew tap homebrew/cask-fonts
 brew install --cask font-fira-code-nerd-font
 ehco "!! ACTION_ITEM: import custom.iterm.json profile to iterm2"
 
+#
+#  screenshots
+mkdir -p ~/Screenshots
+defaults write com.apple.screencapture ~/Screenshots
+
 echo "done"
 
