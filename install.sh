@@ -19,6 +19,7 @@ ensure_brew_installed() {
 
 ensure_brew_installed fish
 ensure_brew_installed zellij
+ensure_brew_installed helix
 ensure_brew_installed starship
 ensure_brew_installed tree
 ensure_brew_installed htop
@@ -33,6 +34,7 @@ ensure_brew_installed agg
 # zellij plugins
 #
 echo "downloading zellij plugins"
+mkdir -p zellij/plugins
 curl -L https://github.com/dj95/zjstatus/releases/download/v0.13.0/zjstatus.wasm > zellij/plugins/zjstatus.wasm
 echo "zellij plugins are downloaded"
 echo "!! ACTION_ITEM: might require granting permission on first launch!"
