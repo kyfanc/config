@@ -12,7 +12,7 @@ ensure_brew_installed() {
 	app=$1
 	if [ ! $(which "$app") ]; then
 		echo "installing $app..."
-		brew install nvim
+		brew install $app
 	fi
 	echo "$app is installed"
 }
