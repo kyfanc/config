@@ -1,0 +1,5 @@
+{
+  "keyMappings": "# Insert your preferred key mappings here.\nmap gw LinkHints.activateMode\nmap gW LinkHints.activateModeToOpenInNewTab\nmap <space>[ previousTab\nmap <space>] nextTab\nmap K scrollPageUp\nmap J scrollPageDown\nunmap ^\nmap <space><space> visitPreviousTab",
+  "settingsVersion": "2.1.2",
+  "userDefinedLinkHintCss": "# Insert your preferred key mappings here.\nmap gw LinkHints.activateMode\nmap gW LinkHints.activateModeToOpenInNewTab\nmap <space>[ previousTab\nmap <space>] nextTab\nmap K scrollPageUp\nmap J scrollPageDown\nunmap ^\nmap <space><space> visitPreviousTab"
+}
