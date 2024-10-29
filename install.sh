@@ -33,6 +33,9 @@ echo "configuring fish"
 chsh -s $(which fish)
 echo $(which fish) >> /etc/shells
 echo "set fish as default shell"
+echo "install fisher"
+curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher
+fisher install jorgebucaran/nvm.fish
 echo "fish is ready"
 
 #
