@@ -26,6 +26,7 @@ mkdir -p ~/.config/fish
 link_file $(pwd)/fish/config.fish ~/.config/fish/config.fish
 link_folder $(pwd)/fish/functions ~/.config/fish/functions
 link_file $(pwd)/starship/starship.toml ~/.config/starship.toml
+link_folder $(pwd)/alacritty ~/.config/
 link_folder $(pwd)/helix ~/.config/
 link_folder $(pwd)/zellij ~/.config/
 link_folder $(pwd)/gitui ~/.config/
