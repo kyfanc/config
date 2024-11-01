@@ -11,6 +11,7 @@ rust-analyzer.check.command = "clippy"
 [[language]]
 name = "python"
 auto-format = true
+formatter = { command = 'yapf', args = [] }
 
 # go
 # install lsp

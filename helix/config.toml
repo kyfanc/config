@@ -50,6 +50,9 @@ render = true
 display-messages = true
 display-inlay-hints = true
 
+[editor.whitespace]
+render = "all"
+
 [keys.normal]
 C-a = "select_all"
 C-k = "copy_selection_on_prev_line"

@@ -4,12 +4,15 @@ fish_add_path ~/go/bin
 fish_add_path ~/Library/Python/3.9/bin
 fish_add_path ~/.cargo/bin
 
+# alias
+alias ls "eza --all --long --group --group-directories-first --icons --header --time-style long-iso"
+
 # use vi binding for command editing
 set -g fish_key_bindings fish_vi_key_bindings
 
 # editor
-set -Ux EDITOR "hx"
-set -Ux VISUAL "hx"
+set -Ux EDITOR hx
+set -Ux VISUAL hx
 
 if status is-interactive
     # Commands to run in interactive sessions can go here
