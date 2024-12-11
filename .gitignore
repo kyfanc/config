@@ -1,3 +1,5 @@
 .DS_Store
 brewfile.lock.json
 zellij/plugins/*
+# fisher functions
+fish/functions/*.fish

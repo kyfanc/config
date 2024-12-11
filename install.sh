@@ -35,17 +35,17 @@ chsh -s $(which fish)
 echo $(which fish) >> /etc/shells
 echo "set fish as default shell"
 echo "install fisher"
-curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher
+curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source
+fisher install jorgebucaran/fisher
 fisher install jorgebucaran/nvm.fish
+fisher install PatrickF1/fzf.fish
 echo "fish is ready"
 
 #
 #  screenshots
+#
 mkdir -p ~/Screenshots
 defaults write com.apple.screencapture ~/Screenshots
-
-ehco "!! ACTION_ITEMS:"
-echo "- import custom.iterm.json profile to iterm2"
 
 echo "done"
 

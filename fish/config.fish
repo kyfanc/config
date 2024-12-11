@@ -4,6 +4,9 @@ fish_add_path ~/go/bin
 fish_add_path ~/Library/Python/3.9/bin
 fish_add_path ~/.cargo/bin
 
+# add custom fish function folder
+set -Up fish_function_path ~/.config/fish/functions/custom
+
 # alias
 alias ls "eza --all --long --group --group-directories-first --icons --header --time-style long-iso"
 
@@ -19,5 +22,5 @@ if status is-interactive
     eval (zellij setup --generate-auto-start fish | string collect)
 end
 
-# enable fish
+# enable starship
 starship init fish | source

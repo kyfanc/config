@@ -24,7 +24,7 @@ mkdir -p ~/.config
 link_file $(pwd)/.gitconfig ~/.gitconfig
 mkdir -p ~/.config/fish
 link_file $(pwd)/fish/config.fish ~/.config/fish/config.fish
-link_folder $(pwd)/fish/functions ~/.config/fish/functions
+link_folder $(pwd)/fish/functions ~/.config/fish/
 link_file $(pwd)/starship/starship.toml ~/.config/starship.toml
 link_folder $(pwd)/alacritty ~/.config/
 link_folder $(pwd)/helix ~/.config/
