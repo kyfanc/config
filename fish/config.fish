@@ -27,5 +27,6 @@ if status is-interactive
     eval (zellij setup --generate-auto-start fish | string collect)
 end
 
-# enable starship
+# enable shell toolings
 starship init fish | source
+zoxide init fish | source
