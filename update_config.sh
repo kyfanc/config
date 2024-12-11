@@ -7,7 +7,7 @@ link_file ()
 	src=$1
 	dst=$2
 	echo "linking $src as $dst"
-	ln -f "$src" "$dst"
+	ln -sf "$src" "$dst"
 }
 
 link_folder()
