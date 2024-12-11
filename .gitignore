@@ -3,3 +3,5 @@ brewfile.lock.json
 zellij/plugins/*
 # fisher functions
 fish/functions/*.fish
+# fish env specific configs
+fish/config.custom.fish

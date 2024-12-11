@@ -17,6 +17,11 @@ set -g fish_key_bindings fish_vi_key_bindings
 set -Ux EDITOR hx
 set -Ux VISUAL hx
 
+# env specific config
+if test -e ~/.config/fish/config.custom.fish
+    source ~/.config/fish/config.custom.fish
+end
+
 if status is-interactive
     # Commands to run in interactive sessions can go here
     eval (zellij setup --generate-auto-start fish | string collect)
