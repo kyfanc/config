@@ -2,3 +2,4 @@ font-family = "FiraCode Nerd Font Mono Med"
 font-size = 16
 theme = "GruvboxDarkHard"
 command = /opt/homebrew/bin/fish
+macos-option-as-alt = true
