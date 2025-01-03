@@ -13,6 +13,7 @@ fi
 #
 brew bundle install --file=brewfile
 brew install --no-quarantine --cask alacritty
+brew install --no-quarantine --cask ghostty
 
 #
 # zellij plugins
