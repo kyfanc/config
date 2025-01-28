@@ -1,8 +1,2 @@
 [kubernetes]
 disabled = false
-
-[custom.asciinema]
-command = 'echo 🎥' # shows output of command
-when = ''' test "$ASCIINEMA_REC" = "1" '''
-format = '$output'
-description = 'indicate asciinema recording session'
