@@ -1,7 +1,6 @@
 theme = "gruvbox_dark_hard"
 
 [editor]
-auto-format = true
 bufferline = "multiple"
 line-number = "relative"
 completion-trigger-len = 1
@@ -59,15 +58,8 @@ render = "all"
 
 [keys.normal]
 C-a = "select_all"
-C-k = "copy_selection_on_prev_line"
-C-j = "copy_selection_on_next_line"
-A-k = ["extend_to_line_bounds", "delete_selection", "move_line_up", "paste_before"]
-A-j = ["extend_to_line_bounds", "delete_selection", "paste_after"]
-C-h = "jump_view_left"
-C-l = "jump_view_right"
-C-v = "vsplit"
-J = "half_page_down"
-K = "half_page_up"
+K = "copy_selection_on_prev_line"
+J = "copy_selection_on_next_line"
 "$" = "goto_line_end"
 "^" = "goto_first_nonwhitespace"
 G = "goto_file_end"
@@ -80,6 +72,8 @@ esc = ["collapse_selection", "keep_primary_selection"]
 x = ["yank_to_clipboard", "delete_selection"]
 s = "select_regex"
 "?" = ["select_all", "search"]
+i = ["insert_mode", "collapse_selection"]
+a = ["append_mode", "collapse_selection"]
 
 [keys.select]
 "$" = "goto_line_end"
@@ -92,13 +86,13 @@ p = "paste_clipboard_after"
 P = "paste_clipboard_before"
 R = "replace_selections_with_clipboard"
 esc = ["collapse_selection", "keep_primary_selection", "normal_mode"]
-J = "half_page_down"
-K = "half_page_up"
 A-k = ["extend_to_line_bounds", "delete_selection", "move_line_up", "paste_before"]
 A-j = ["extend_to_line_bounds", "delete_selection", "paste_after"]
+i = ["insert_mode", "collapse_selection"]
+a = ["append_mode", "collapse_selection"]
 
 [keys.normal.space]
-"[" = "goto_previous_buffer" 
+"[" = "goto_previous_buffer"
 "]" = "goto_next_buffer"
 "=" = [":format", "select_all", ":pipe git stripspace"]
 E = "workspace_diagnostics_picker"
@@ -107,9 +101,14 @@ d = "hover"
 e = "diagnostics_picker"
 f = "file_picker_in_current_directory"
 F = "file_picker"
-p = "last_picker"
-space = "goto_last_accessed_file"
+space = "last_picker"
 "B" = ":pipe-to ~/.config/helix/bin/git-blame.sh"
+o = "jump_backward"
+i = "jump_forward"
+u = "switch_to_lowercase"
+U = "switch_to_uppercase"
+"+" = "increment"
+"-" = "decrement"
 
 # buffer
 [keys.normal.space.b]
@@ -127,12 +126,9 @@ space = "goto_last_accessed_file"
 "R" = ":reload-all"
 "n" = ":new"
 
-# open
-[keys.normal.space.o]
-"l" = ":open ~/.config/helix/languages.toml"
-"c" = ":open ~/.config/helix/config.toml"
-"z" = ":open ~/.config/zellij/config.kdl"
-"f" = ":open ~/.config/fish/config.fish"
+[keys.normal.space.g]
+r = ":reset-diff-change"
+p = "changed_file_picker"
 
 # toggle
 [keys.normal.space.t]
@@ -142,10 +138,8 @@ space = "goto_last_accessed_file"
 "l" = ":toggle lsp.enabled"
 "w" = ":toggle soft-wrap.enable"
 
-# llm
-[keys.normal.space.m]
-"s" = ["yank_to_clipboard", ":sh zellij run --floating -- fish -c 'ollama run mistral \"$(pbpaste | bun run ~/.config/helix/bin/llm.ts --prompt-only --prompt summarizeCode)\" | bat -pp -l md'"]
-"d" = ["yank_to_clipboard", ":sh zellij run --floating -- fish -c 'ollama run mistral \"$(pbpaste | bun run ~/.config/helix/bin/llm.ts --prompt-only --prompt diagnoseCode)\" | bat -pp -l md'"]
-[keys.select.space.m]
-"s" = ["yank_to_clipboard", ":sh zellij run --floating -- fish -c 'ollama run mistral \"$(pbpaste | bun run ~/.config/helix/bin/llm.ts --prompt-only --prompt summarizeCode)\" | bat -pp -l md'"]
-"d" = ["yank_to_clipboard", ":sh zellij run --floating -- fish -c 'ollama run mistral \"$(pbpaste | bun run ~/.config/helix/bin/llm.ts --prompt-only --prompt diagnoseCode)\" | bat -pp -l md'"]
+[keys.select.space]
+u = "switch_to_lowercase"
+U = "switch_to_uppercase"
+"+" = "increment"
+"-" = "decrement"

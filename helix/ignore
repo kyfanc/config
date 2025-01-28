@@ -1,3 +1,5 @@
 target
 .git
 node_modules
+build
+.terraform

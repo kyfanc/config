@@ -10,7 +10,6 @@ rust-analyzer.check.command = "clippy"
 # pip3 install python-lsp-server[all] python-lsp-ruff black
 [[language]]
 name = "python"
-auto-format = true
 formatter = { command = 'yapf', args = [] }
 
 # go
@@ -36,10 +35,7 @@ formatter = { command = 'prettier', args = ["--parser", "css"] }
 [[language]]
 name = "javascript"
 formatter = { command = 'prettier', args = ["--parser", "typescript"] }
-auto-format = true
 
 [[language]]
 name = "typescript"
 formatter = { command = 'prettier', args = ["--parser", "typescript"] }
-auto-format = true
-
