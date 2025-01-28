@@ -4,7 +4,7 @@
 
 [core]
 	editor = hx
-    pager = delta
+    # pager = delta
 
 [interactive]
     diffFilter = delta --color-only
