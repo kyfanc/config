@@ -3,6 +3,5 @@ font-size = 16
 theme = "GruvboxDarkHard"
 command = /opt/homebrew/bin/fish
 macos-option-as-alt = true
-macos-titlebar-style = hidden
 copy-on-select = clipboard
 
