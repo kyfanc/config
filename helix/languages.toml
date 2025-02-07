@@ -46,6 +46,7 @@ name = "markdown"
 soft-wrap.enable = true
 text-width = 80
 soft-wrap.wrap-at-text-width = true
+language-servers = ["marksman", "harper-ls"]
 formatter = { command = 'prettier', args = [
   "--parser",
   "markdown",
@@ -53,3 +54,7 @@ formatter = { command = 'prettier', args = [
   "never", # <always|never|preserve>
 ] }
 auto-format = true
+
+[language-server.harper-ls]
+command = "harper-ls"
+args = ["--stdio"]
