@@ -138,6 +138,13 @@ p = "changed_file_picker"
 "l" = ":toggle lsp.enabled"
 "w" = ":toggle soft-wrap.enable"
 
+# zen mode:
+# ref: https://helix-editor-tutorials.com/tutorials/writing-documentation-and-prose-in-markdown-using-helix/
+# > stty size
+# 31 253
+# (253 - 80) / 2 ~= 80 + 5 (where 5 being line numbers col width)
+"z" = ":toggle gutters.line-numbers.min-width 80 5"
+
 [keys.select.space]
 u = "switch_to_lowercase"
 U = "switch_to_uppercase"
