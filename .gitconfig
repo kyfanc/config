@@ -11,9 +11,13 @@
 
 [merge]
     conflictstyle = diff3
+	ff = no
 
 [diff]
-    colorMoved = default
+	colorMoved = plain
+	mnemonicPrefix = true
+	renames = true
+	algorithm = histogram
 
 [delta]
     navigate = true    # use n and N to move between diff sections
@@ -69,3 +73,22 @@
     merge-conflict-theirs-diff-header-style = "#FABD2F" bold overline
     merge-conflict-ours-diff-header-decoration-style = ''
     merge-conflict-theirs-diff-header-decoration-style = ''
+
+[push]
+	default = simple
+	autoSetupRemote = true
+	followTags = true
+[fetch]
+	prune = true
+	pruneTags = true
+	all = true
+[tag]
+	sort = version:refname
+[branch]
+	sort = -committerdate
+[rerere]
+	enabled = true
+	autoupdate = true
+[pull]
+	rebase = true
+
