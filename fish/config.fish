@@ -17,6 +17,9 @@ set -g fish_key_bindings fish_vi_key_bindings
 set -Ux EDITOR hx
 set -Ux VISUAL hx
 
+# brew
+set -Ux HOMEBREW_NO_AUTO_UPDATE 1
+
 # env specific config
 if test -e ~/.config/fish/config.custom.fish
     source ~/.config/fish/config.custom.fish
