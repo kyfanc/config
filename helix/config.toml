@@ -104,7 +104,6 @@ e = "diagnostics_picker"
 f = "file_picker_in_current_directory"
 F = "file_picker"
 space = "last_picker"
-"B" = ":pipe-to ~/.config/helix/bin/git-blame.sh"
 o = "jump_backward"
 i = "jump_forward"
 u = "switch_to_lowercase"
@@ -128,7 +127,16 @@ U = "switch_to_uppercase"
 "R" = ":reload-all"
 "n" = ":new"
 
+# git
 [keys.normal.space.g]
+# show git log
+l = ":sh git -C $(dirname $(realpath %{buffer_name})) log"
+# show git line blame one-liner
+b = ":sh git -C $(dirname $(realpath %{buffer_name})) blame -L %{cursor_line},%{cursor_line} $(realpath %{buffer_name})"
+# show line blame commit
+B = ":sh cd $(dirname $(realpath %{buffer_name})) && git show %sh{git blame -L %{cursor_line},+1 %{buffer_name} | awk '{ print $1 }' }"
+# show line blame commit with zellij floating plane
+# B = ":echo %sh{zellij run --floating --close-on-exit -- bash -c \"git show %sh{git blame -L %{cursor_line},+1 %{buffer_name} | awk '{ print $1 }' } | delta \"}"
 r = ":reset-diff-change"
 p = "changed_file_picker"
 
