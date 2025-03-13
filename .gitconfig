@@ -92,3 +92,5 @@
 [pull]
 	rebase = true
 
+[alias]
+	ui = !gitui
