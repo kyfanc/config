@@ -63,6 +63,12 @@ J = "copy_selection_on_next_line"
 "$" = "goto_line_end"
 "^" = "goto_first_nonwhitespace"
 G = "goto_file_end"
+w = ["move_next_word_start", "move_char_right", "collapse_selection"]
+W = ["move_next_long_word_start", "move_char_right", "collapse_selection"]
+e = ["move_next_word_end", "collapse_selection"]
+E = ["move_next_long_word_end", "collapse_selection"]
+b = ["move_prev_word_start", "collapse_selection"]
+B = ["move_prev_long_word_start", "collapse_selection"]
 "%" = "match_brackets"
 y = "yank_to_clipboard"
 Y = ":clipboard-yank-join"
@@ -73,12 +79,22 @@ esc = ["collapse_selection", "keep_primary_selection"]
 x = ["yank_to_clipboard", "delete_selection"]
 s = "select_regex"
 "?" = ["select_all", "search"]
+A-j = ["extend_to_line_bounds", "delete_selection", "paste_after"]
+A-k = ["extend_to_line_bounds", "delete_selection", "move_line_up", "paste_before"]
 i = ["insert_mode", "collapse_selection"]
 a = ["append_mode", "collapse_selection"]
 "+" = "increment"
 "_" = "decrement"
+j = "move_line_down"
+k = "move_line_up"
+
+[keys.normal.d]
+d = ["extend_to_line_bounds", "yank_main_selection_to_clipboard", "delete_selection"]
 
 [keys.select]
+"{" = ["extend_to_line_bounds", "goto_prev_paragraph"]
+"}" = ["extend_to_line_bounds", "goto_next_paragraph"]
+0 = "goto_line_start"
 "$" = "goto_line_end"
 "^" = "goto_first_nonwhitespace"
 G = "goto_file_end"
@@ -131,6 +147,7 @@ U = "switch_to_uppercase"
 
 # git
 [keys.normal.space.g]
+_ = "@ git\n"
 # show git log
 l = ":sh git -C $(dirname $(realpath %{buffer_name})) log"
 # show git line blame one-liner
@@ -141,6 +158,7 @@ B = ":sh cd $(dirname $(realpath %{buffer_name})) && git show %sh{git blame -L %
 # B = ":echo %sh{zellij run --floating --close-on-exit -- bash -c \"git show %sh{git blame -L %{cursor_line},+1 %{buffer_name} | awk '{ print $1 }' } | delta \"}"
 r = ":reset-diff-change"
 p = "changed_file_picker"
+0 =":x"
 
 # toggle
 [keys.normal.space.t]
