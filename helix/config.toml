@@ -75,6 +75,8 @@ s = "select_regex"
 "?" = ["select_all", "search"]
 i = ["insert_mode", "collapse_selection"]
 a = ["append_mode", "collapse_selection"]
+"+" = "increment"
+"_" = "decrement"
 
 [keys.select]
 "$" = "goto_line_end"
@@ -92,6 +94,8 @@ A-k = ["extend_to_line_bounds", "delete_selection", "move_line_up", "paste_befor
 A-j = ["extend_to_line_bounds", "delete_selection", "paste_after"]
 i = ["insert_mode", "collapse_selection"]
 a = ["append_mode", "collapse_selection"]
+"+" = "increment"
+"_" = "decrement"
 
 [keys.normal.space]
 "[" = "goto_previous_buffer"
@@ -108,8 +112,6 @@ o = "jump_backward"
 i = "jump_forward"
 u = "switch_to_lowercase"
 U = "switch_to_uppercase"
-"+" = "increment"
-"-" = "decrement"
 
 # buffer
 [keys.normal.space.b]
@@ -158,5 +160,3 @@ p = "changed_file_picker"
 [keys.select.space]
 u = "switch_to_lowercase"
 U = "switch_to_uppercase"
-"+" = "increment"
-"-" = "decrement"
