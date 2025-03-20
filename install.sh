@@ -12,7 +12,6 @@ fi
 # install brew packages
 #
 brew bundle install --file=brewfile
-brew install --no-quarantine --cask alacritty
 brew install --no-quarantine --cask ghostty
 
 #
