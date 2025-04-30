@@ -23,9 +23,6 @@ layout {
 	            datetime_timezone "Asia/Hong_Kong"
 	        }
         }
-        pane size=1 borderless=true {
-            plugin location="zellij:status-bar"
-        }
     }
 }
 
