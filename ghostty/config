@@ -1,5 +1,5 @@
 font-family = "FiraCode Nerd Font Mono Med"
-font-size = 16
+font-size = 18
 theme = "GruvboxDarkHard"
 command = /opt/homebrew/bin/fish
 macos-option-as-alt = true
