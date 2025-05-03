@@ -19,7 +19,7 @@ brew install --no-quarantine --cask ghostty
 #
 echo "downloading zellij plugins"
 mkdir -p zellij/plugins
-curl -L https://github.com/dj95/zjstatus/releases/download/v0.20.0/zjstatus.wasm > zellij/plugins/zjstatus.wasm
+curl -L https://github.com/dj95/zjstatus/releases/download/v0.20.2/zjstatus.wasm > zellij/plugins/zjstatus.wasm
 echo "zellij plugins are downloaded"
 echo "!! ACTION_ITEM: might require granting permission on first launch!"
 
