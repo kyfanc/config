@@ -142,7 +142,6 @@ keybinds clear-defaults=true {
         bind "Alt i" { MoveTab "left"; }
         bind "Alt n" { NewPane; }
         bind "Alt o" { MoveTab "right"; }
-        bind "Ctrl q" { Quit; }
         bind "Alt w" { ToggleFloatingPanes; SwitchToMode "normal"; }
     }
     shared_except "locked" "move" {
