@@ -10,9 +10,6 @@ set -Up fish_function_path ~/.config/fish/functions/custom
 # alias
 alias ls "eza --all --long --group --group-directories-first --icons --header --time-style long-iso"
 
-# use vi binding for command editing
-set -g fish_key_bindings fish_vi_key_bindings
-
 # editor
 set -Ux EDITOR hx
 set -Ux VISUAL hx
