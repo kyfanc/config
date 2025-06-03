@@ -112,6 +112,7 @@ i = ["insert_mode", "collapse_selection"]
 a = ["append_mode", "collapse_selection"]
 "+" = "increment"
 "_" = "decrement"
+d = "delete_selection_noyank"
 
 [keys.normal.space]
 "[" = "goto_previous_buffer"
