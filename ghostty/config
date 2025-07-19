@@ -4,4 +4,5 @@ theme = "GruvboxDarkHard"
 command = /opt/homebrew/bin/fish
 macos-option-as-alt = true
 copy-on-select = clipboard
-
+# 1GB
+scrollback-limit = 1073741824
