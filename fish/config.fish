@@ -1,5 +1,10 @@
 # make package manager installed app discoverable
 fish_add_path /opt/homebrew/bin
+fish_add_path /opt/homebrew/opt/coreutils/libexec/gnubin
+fish_add_path /opt/homebrew/opt/gnu-sed/libexec/gnubin
+fish_add_path /opt/homebrew/opt/gawk/libexec/gnubin
+fish_add_path /opt/homebrew/opt/findutils/libexec/gnubin
+fish_add_path /opt/homebrew/opt/grep/libexec/gnubin
 fish_add_path ~/go/bin
 fish_add_path ~/Library/Python/3.9/bin
 fish_add_path ~/.cargo/bin
