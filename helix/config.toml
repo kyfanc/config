@@ -157,11 +157,8 @@ l = ":sh git -C $(dirname $(realpath %{buffer_name})) log"
 b = ":sh git -C $(dirname $(realpath %{buffer_name})) blame -L %{cursor_line},%{cursor_line} $(realpath %{buffer_name})"
 # show line blame commit
 B = ":sh cd $(dirname $(realpath %{buffer_name})) && git show %sh{git blame -L %{cursor_line},+1 %{buffer_name} | awk '{ print $1 }' }"
-# show line blame commit with zellij floating plane
-# B = ":echo %sh{zellij run --floating --close-on-exit -- bash -c \"git show %sh{git blame -L %{cursor_line},+1 %{buffer_name} | awk '{ print $1 }' } | delta \"}"
 r = ":reset-diff-change"
 p = "changed_file_picker"
-0 =":x"
 
 # toggle
 [keys.normal.space.t]
@@ -170,13 +167,6 @@ p = "changed_file_picker"
 "h" = ":toggle lsp.display-inlay-hints"
 "l" = ":toggle lsp.enabled"
 "w" = ":toggle soft-wrap.enable"
-
-# zen mode:
-# ref: https://helix-editor-tutorials.com/tutorials/writing-documentation-and-prose-in-markdown-using-helix/
-# > stty size
-# 31 253
-# (253 - 80) / 2 ~= 80 + 5 (where 5 being line numbers col width)
-"z" = ":toggle gutters.line-numbers.min-width 80 5"
 
 [keys.select.space]
 u = "switch_to_lowercase"
