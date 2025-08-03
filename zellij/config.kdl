@@ -81,18 +81,22 @@ keybinds clear-defaults=true {
         bind "tab" { MovePane; }
     }
     scroll {
-        bind "Ctrl b" { PageScrollUp; }
+        bind "Ctrl u" { PageScrollUp; }
+        bind "Ctrl d" { PageScrollDown; }
+        bind "q" { SwitchToMode "normal"; }
         bind "e" { EditScrollback; SwitchToMode "normal"; }
         bind "s" { SwitchToMode "entersearch"; SearchInput 0; }
+        bind "/" { SwitchToMode "entersearch"; SearchInput 0; }
     }
     search {
+        bind "Ctrl u" { PageScrollUp; }
+        bind "Ctrl d" { PageScrollDown; }
+        bind "q" { SwitchToMode "normal"; }
         bind "N" { Search "up"; }
         bind "c" { SearchToggleOption "CaseSensitivity"; }
-        bind "Ctrl d" { PageScrollDown; }
         bind "n" { Search "down"; }
         bind "o" { SearchToggleOption "WholeWord"; }
         bind "p" { Search "up"; }
-        bind "Ctrl u" { PageScrollUp; }
         bind "w" { SearchToggleOption "Wrap"; }
     }
     session {
@@ -181,8 +185,8 @@ keybinds clear-defaults=true {
     shared_among "scroll" "search" {
         bind "PageDown" { PageScrollDown; }
         bind "PageUp" { PageScrollUp; }
-        bind "left" { PageScrollUp; }
-        bind "down" { ScrollDown; }
+        bind "Ctrl d" { PageScrollDown; }
+        bind "Ctrl u" { PageScrollUp; }
         bind "up" { ScrollUp; }
         bind "right" { PageScrollDown; }
         bind "J" { HalfPageScrollDown; }
@@ -340,7 +344,7 @@ pane_frames false
 // Valid values: positive integers
 // Default value: 10000
 // 
-scroll_buffer_size 100000
+scroll_buffer_size 1000000
  
 // Provide a command to execute when copying text. The text will be piped to
 // the stdin of the program to perform the copy. This can be used with
