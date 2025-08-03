@@ -4,7 +4,7 @@
 
 [core]
 	editor = hx
-    # pager = delta
+    pager = delta
 
 [interactive]
     diffFilter = delta --color-only
@@ -22,19 +22,20 @@
 [delta]
     navigate = true    # use n and N to move between diff sections
     true-color = always
-	features = "gruvmax-fang" 
+	features = "custom" 
 
 # ref: https://raw.githubusercontent.com/dandavison/delta/master/themes.gitconfig
-[delta "gruvmax-fang"]
-    # author: https://github.com/maxfangx
+[delta "custom"]
     # General appearance
     dark = true
     syntax-theme = gruvbox-dark
+	# commit
+	commit-style = raw
     # File
     file-style = "#FFFFFF" bold
     file-added-label = [+]
     file-copied-label = [==]
-    file-modified-label = [*]
+    file-modified-label = [~]
     file-removed-label = [-]
     file-renamed-label = [->]
     file-decoration-style = "#434C5E" ul
@@ -60,8 +61,8 @@
     plus-non-emph-style = syntax auto
     whitespace-error-style = "#FB4934" reverse
     # Commit hash
-    commit-decoration-style = normal box
-    commit-style = "#ffffff" bold
+    # commit-decoration-style = normal box
+    # commit-style = "#ffffff" bold
     # Blame
     blame-code-style = syntax
     blame-format = "{author:>18} ({commit:>8}) {timestamp:<13} "
