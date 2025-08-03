@@ -22,15 +22,15 @@
 [delta]
     navigate = true    # use n and N to move between diff sections
     true-color = always
-	features = "custom" 
+    features = "custom"
 
 # ref: https://raw.githubusercontent.com/dandavison/delta/master/themes.gitconfig
 [delta "custom"]
     # General appearance
     dark = true
     syntax-theme = gruvbox-dark
-	# commit
-	commit-style = raw
+    # commit
+    commit-style = raw
     # File
     file-style = "#FFFFFF" bold
     file-added-label = [+]
@@ -56,8 +56,10 @@
     minus-style = syntax "#330011"
     minus-emph-style = syntax "#80002a"
     minus-non-emph-style = syntax auto
+    minus-empty-line-marker-style = syntax "#600000"
     plus-style = syntax "#001a00"
-    plus-emph-style = syntax "#003300"
+    plus-emph-style = syntax "#227722"
+    plus-empty-line-marker-style = syntax "#005500"
     plus-non-emph-style = syntax auto
     whitespace-error-style = "#FB4934" reverse
     # Commit hash
@@ -74,6 +76,9 @@
     merge-conflict-theirs-diff-header-style = "#FABD2F" bold overline
     merge-conflict-ours-diff-header-decoration-style = ''
     merge-conflict-theirs-diff-header-decoration-style = ''
+    # grep
+    grep-file-style = syntax "#227722"
+    grep-line-number-style = "#479B36"
 
 [push]
 	default = simple
