@@ -22,6 +22,7 @@ echo "updating configs"
 mkdir -p ~/.config
 
 link_file $(pwd)/.gitconfig ~/.gitconfig
+link_file $(pwd)/.ripgreprc ~/.ripgreprc
 mkdir -p ~/.config/fish
 link_file $(pwd)/fish/config.fish ~/.config/fish/config.fish
 link_folder $(pwd)/fish/functions ~/.config/fish/

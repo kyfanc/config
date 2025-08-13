@@ -6,7 +6,6 @@ fish_add_path /opt/homebrew/opt/gawk/libexec/gnubin
 fish_add_path /opt/homebrew/opt/findutils/libexec/gnubin
 fish_add_path /opt/homebrew/opt/grep/libexec/gnubin
 fish_add_path ~/go/bin
-fish_add_path ~/Library/Python/3.9/bin
 fish_add_path ~/.cargo/bin
 
 # add custom fish function folder
@@ -21,6 +20,9 @@ set -Ux VISUAL hx
 
 # brew
 set -Ux HOMEBREW_NO_AUTO_UPDATE 1
+
+# rg config path
+set -Ux RIPGREP_CONFIG_PATH ~/.ripgreprc
 
 # env specific config
 if test -e ~/.config/fish/config.custom.fish
