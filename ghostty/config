@@ -1,6 +1,6 @@
 font-family = "FiraCode Nerd Font Mono Med"
 font-size = 21
-theme = "GruvboxDarkHard"
+theme = "Gruvbox Dark Hard"
 command = /opt/homebrew/bin/fish
 macos-option-as-alt = true
 copy-on-select = clipboard
