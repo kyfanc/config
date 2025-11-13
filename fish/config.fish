@@ -11,6 +11,10 @@ fish_add_path ~/.cargo/bin
 # add custom fish function folder
 set -Up fish_function_path ~/.config/fish/functions/custom
 
+# key-bind
+# avoid accidentally killing fish shell
+bind \cd end-of-line
+
 # alias
 alias ls "eza --all --long --group --group-directories-first --icons --header --time-style long-iso"
 
