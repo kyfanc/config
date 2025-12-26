@@ -131,6 +131,7 @@ u = "switch_to_lowercase"
 U = "switch_to_uppercase"
 x = "file_explorer_in_current_buffer_directory"
 X = "file_explorer"
+Y = "yank_joined_to_clipboard"
 
 # buffer
 [keys.normal.space.b]
