@@ -1,5 +1,4 @@
 local vim = vim -- suppress lsp warnings
-vim.g.clipboard = "pbcopy"
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 vim.opt.autoread = true
@@ -59,7 +58,6 @@ local function setup_lsp()
     group = augroup,
     callback = function(ev)
       local bufopts = { noremap = true, silent = true, buffer = ev.buf }
-      vim.keymap.set("n", "grd", vim.lsp.buf.definition, bufopts)
       vim.keymap.set("i", "<C-k>", vim.lsp.completion.get, bufopts) -- open completion menu manually
       local client = assert(vim.lsp.get_client_by_id(ev.data.client_id))
       local methods = vim.lsp.protocol.Methods
@@ -77,11 +75,6 @@ vim.pack.add({
   'https://github.com/nvim-mini/mini.nvim',
   'https://github.com/nvim-treesitter/nvim-treesitter',
   "https://github.com/nvim-lua/plenary.nvim",
-  {
-    src = "https://github.com/nvim-telescope/telescope-fzf-native.nvim",
-    build = "make",
-  },
-  "https://github.com/nvim-telescope/telescope.nvim",
   "https://github.com/lewis6991/gitsigns.nvim",
 })
 
@@ -98,18 +91,6 @@ require("mini.trailspace").setup()
 require('gitsigns').setup()
 
 vim.cmd("colorscheme gruvbox")
-require('telescope').setup {
-  extensions = {
-    fzf = {
-      fuzzy = true,                    -- false will only do exact matching
-      override_generic_sorter = true,  -- override the generic sorter
-      override_file_sorter = true,     -- override the file sorter
-      case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
-                                       -- the default case_mode is "smart_case"
-    }
-  }
-}
--- require('telescope').load_extension('fzf')
 
 -- keymap
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
@@ -121,7 +102,10 @@ require("which-key").add({
   { "<leader>f", "<cmd>Pick files<cr>", desc = "Find File", mode = "n" },
   { "<leader>b", "<cmd>Pick buffers<cr>", desc = "Find Buffers", mode = "n" },
   { "<leader>'", "<cmd>Pick resume<cr>", desc = "Resume last find picker", mode = "n" },
+  { "<leader>a", vim.lsp.buf.code_action, desc = "Code action", mode = "n" },
+  { "<leader>k", vim.lsp.buf.signature_help, desc = "Signature", mode = "n" },
   { "<leader>g", group = "g", desc = "Goto", mode = "n" },
+  { "<leader>gD", vim.lsp.buf.declaration, desc = "Goto type definition", mode = "n" },
   { "<leader>gd", vim.lsp.buf.type_definition, desc = "Goto type definition", mode = "n" },
   { "<leader>gi", vim.lsp.buf.implementation, desc = "Goto implementations", mode = "n" },
   { "<leader>gr", vim.lsp.buf.references, desc = "Goto references", mode = "n" },
@@ -131,6 +115,6 @@ require("which-key").add({
   { "<leader>de", vim.diagnostic.open_float, desc = "Open floating diagnostic message", mode = "n" },
   { "<leader>dl", vim.diagnostic.setloclist, desc = "Open diagnostics list", mode = "n" },
   { "<leader>dq", vim.diagnostic.setqflist, desc = "Open quick fix list", mode = "n" },
-  { "<A-k>", "ddkP", desc = "move line up", mode = "n" },
-  { "<A-j>", "ddjP", desc = "move line down", mode = "n" },
+  { "<A-k>", "<cmd>m .-2<cr>==", desc = "move line up", mode = "n" },
+  { "<A-j>", "<cmd>m .+1<cr>==", desc = "move line down", mode = "n" },
 })
