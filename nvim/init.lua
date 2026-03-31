@@ -23,7 +23,6 @@ vim.opt.softtabstop = 2
 vim.opt.swapfile = false
 vim.opt.tabstop = 2
 vim.opt.undofile = true
-vim.opt.undolevels = -1
 vim.opt.wildmode = { "lastused", "full" }
 vim.opt.winborder = "rounded"
 vim.opt.wrap = false
