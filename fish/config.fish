@@ -17,10 +17,11 @@ bind \cd end-of-line
 
 # alias
 alias ls "eza --all --long --group --group-directories-first --icons --header --time-style long-iso"
+alias e "nvim"
 
 # editor
-set -Ux EDITOR hx
-set -Ux VISUAL hx
+set -Ux EDITOR nvim
+set -Ux VISUAL nvim
 
 # brew
 set -Ux HOMEBREW_NO_AUTO_UPDATE 1
