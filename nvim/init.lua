@@ -12,7 +12,6 @@ vim.opt.foldlevelstart = 99
 vim.opt.foldmethod = "indent"
 vim.opt.hlsearch = true
 vim.opt.ignorecase = true
-vim.opt.laststatus = 0
 vim.opt.list = true
 vim.opt.mouse = 'a'
 vim.opt.pumheight = 15
@@ -91,7 +90,7 @@ require("mini.pick").setup()
 require("mini.files").setup()
 require("mini.git").setup()
 require("mini.diff").setup()
-require("mini.statusline").setup()
+require('mini.statusline').setup()
 require("mini.tabline").setup()
 require("mini.trailspace").setup()
 
@@ -114,9 +113,10 @@ vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 vim.keymap.set('n', '<leader><leader>', '<c-^>', { desc = 'fast toggle buffer' })
 
 require("which-key").add({
-  { "<leader>f", group = "file" }, -- group
-  { "<leader>ff", "<cmd>Telescope finde_files<cr>", desc = "Find File", mode = "n" },
-  { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Find Buffers", mode = "n" },
+  { "<leader>f", group = "find" }, -- group
+  { "<leader>ff", "<cmd>Pick files<cr>", desc = "Find File", mode = "n" },
+  { "<leader>fb", "<cmd>Pick buffers<cr>", desc = "Find Buffers", mode = "n" },
+  { "<leader>f\"", "<cmd>Pick resume<cr>", desc = "Resume last find picker", mode = "n" },
   { "<leader>db", vim.diagnostic.goto_prev, desc = "Go to previous diagnostic message", mode = "n" },
   { "<leader>df", vim.diagnostic.goto_next, desc = "Go to next diagnostic message", mode = "n" },
   { "<leader>de", vim.diagnostic.open_float, desc = "Open floating diagnostic message", mode = "n" },
