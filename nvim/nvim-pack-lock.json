@@ -1,5 +1,17 @@
 {
   "plugins": {
+    "CopilotChat.nvim": {
+      "rev": "d2d2574863529cb76b62b028cb5c3196ef5796d6",
+      "src": "https://github.com/CopilotC-Nvim/CopilotChat.nvim"
+    },
+    "copilot.vim": {
+      "rev": "a12fd5672110c8aa7e3c8419e28c96943ca179be",
+      "src": "https://github.com/github/copilot.vim"
+    },
+    "gitsigns.nvim": {
+      "rev": "caa98e2e5e4c23a1652c23be839d2e1722cecc29",
+      "src": "https://github.com/lewis6991/gitsigns.nvim"
+    },
     "gruvbox.nvim": {
       "rev": "334d5fd49fc8033f26408425366c66c6390c57bb",
       "src": "https://github.com/ellisonleao/gruvbox.nvim"

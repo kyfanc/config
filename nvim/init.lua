@@ -23,6 +23,7 @@ vim.opt.softtabstop = 2
 vim.opt.swapfile = false
 vim.opt.tabstop = 2
 vim.opt.undofile = true
+vim.opt.undolevels = -1
 vim.opt.wildmode = { "lastused", "full" }
 vim.opt.winborder = "rounded"
 vim.opt.wrap = false
@@ -52,6 +53,7 @@ local function setup_lsp()
     'marksman',
     'terraformls',
     'bashls',
+    'ts_ls',
   })
 
   autocmd("LspAttach", {
@@ -81,6 +83,7 @@ vim.pack.add({
     build = "make",
   },
   "https://github.com/nvim-telescope/telescope.nvim",
+  "https://github.com/lewis6991/gitsigns.nvim",
 })
 
 -- main setup
@@ -93,6 +96,7 @@ require("mini.diff").setup()
 require('mini.statusline').setup()
 require("mini.tabline").setup()
 require("mini.trailspace").setup()
+require('gitsigns').setup()
 
 vim.cmd("colorscheme gruvbox")
 require('telescope').setup {
@@ -110,16 +114,24 @@ require('telescope').setup {
 
 -- keymap
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
-vim.keymap.set('n', '<leader><leader>', '<c-^>', { desc = 'fast toggle buffer' })
 
 require("which-key").add({
-  { "<leader>f", group = "find" }, -- group
-  { "<leader>ff", "<cmd>Pick files<cr>", desc = "Find File", mode = "n" },
-  { "<leader>fb", "<cmd>Pick buffers<cr>", desc = "Find Buffers", mode = "n" },
-  { "<leader>f\"", "<cmd>Pick resume<cr>", desc = "Resume last find picker", mode = "n" },
+  { "<leader><leader>", '<c-^>', desc = "Toggle last buffer" },
+  { "<leader>[", ':bN<cr>', desc = "Go to previous buffer" },
+  { "<leader>]", ':bn<cr>', desc = "Go to next buffer" },
+  { "<leader>f", "<cmd>Pick files<cr>", desc = "Find File", mode = "n" },
+  { "<leader>b", "<cmd>Pick buffers<cr>", desc = "Find Buffers", mode = "n" },
+  { "<leader>'", "<cmd>Pick resume<cr>", desc = "Resume last find picker", mode = "n" },
+  { "<leader>g", group = "g", desc = "Goto", mode = "n" },
+  { "<leader>gd", vim.lsp.buf.type_definition, desc = "Goto type definition", mode = "n" },
+  { "<leader>gi", vim.lsp.buf.implementation, desc = "Goto implementations", mode = "n" },
+  { "<leader>gr", vim.lsp.buf.references, desc = "Goto references", mode = "n" },
+  { "<leader>r", vim.lsp.buf.rename, desc = "Rename", mode = "n" },
   { "<leader>db", vim.diagnostic.goto_prev, desc = "Go to previous diagnostic message", mode = "n" },
   { "<leader>df", vim.diagnostic.goto_next, desc = "Go to next diagnostic message", mode = "n" },
   { "<leader>de", vim.diagnostic.open_float, desc = "Open floating diagnostic message", mode = "n" },
   { "<leader>dl", vim.diagnostic.setloclist, desc = "Open diagnostics list", mode = "n" },
   { "<leader>dq", vim.diagnostic.setqflist, desc = "Open quick fix list", mode = "n" },
+  { "<A-k>", "ddkP", desc = "move line up", mode = "n" },
+  { "<A-j>", "ddjP", desc = "move line down", mode = "n" },
 })
