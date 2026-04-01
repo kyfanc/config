@@ -130,6 +130,9 @@ keybinds clear-defaults=true {
             }
             SwitchToMode "normal"
         }
+        bind "d" {
+          Detach
+        }
     }
     shared_except "locked" {
         bind "Alt +" { Resize "Increase"; }
@@ -374,7 +377,7 @@ copy_command "pbcopy"
  
 // Path to the default editor to use to edit pane scrollbuffer
 // Default: $EDITOR or $VISUAL
-scrollback_editor "hx"
+// scrollback_editor "hx"
  
 // A fixed name to always give the Zellij session.
 // Consider also setting `attach_to_session true,`
