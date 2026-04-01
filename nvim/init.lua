@@ -33,6 +33,7 @@ vim.o.timeoutlen = 300
 vim.o.completeopt = 'menuone,noselect'
 vim.o.termguicolors = true
 vim.o.background = "dark" -- or "light" for light mode
+vim.diagnostic.config({ virtual_text = true })
 
 -- lsp
 local augroup = vim.api.nvim_create_augroup("erock.cfg", { clear = true })
