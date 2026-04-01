@@ -75,6 +75,7 @@ vim.pack.add({
   'https://github.com/nvim-mini/mini.nvim',
   'https://github.com/nvim-treesitter/nvim-treesitter',
   "https://github.com/nvim-lua/plenary.nvim",
+  "https://github.com/iwe-org/iwe.nvim",
   "https://github.com/lewis6991/gitsigns.nvim",
 })
 
@@ -89,6 +90,7 @@ require('mini.statusline').setup()
 require("mini.tabline").setup()
 require("mini.trailspace").setup()
 require('gitsigns').setup()
+require("iwe").setup()
 
 vim.cmd("colorscheme gruvbox")
 
