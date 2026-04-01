@@ -1,4 +1,6 @@
 font-family = "FiraCode Nerd Font Mono Med"
+# map emojis to use apple emoji fonts instead
+font-codepoint-map = U+1F600-U+1F64F,U+1F300-U+1F5FF,U+1F680-U+1F6FF,U+1F900-U+1F9FF,U+2600-U+26FF,U+2700-U+27BF=Apple Color Emoji
 font-size = 21
 theme = "Gruvbox Dark Hard"
 command = /opt/homebrew/bin/fish
