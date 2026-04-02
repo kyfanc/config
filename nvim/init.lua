@@ -12,61 +12,52 @@ vim.opt.foldmethod = "indent"
 vim.opt.hlsearch = true
 vim.opt.ignorecase = true
 vim.opt.list = true
-vim.opt.mouse = 'a'
+vim.opt.mouse = "a"
 vim.opt.pumheight = 15
 vim.opt.shell = "/bin/bash"
 vim.opt.shiftwidth = 2
 vim.opt.signcolumn = "yes"
 vim.opt.smartcase = true
 vim.opt.softtabstop = 2
+vim.opt.scrolloff = 2
 vim.opt.swapfile = false
 vim.opt.tabstop = 2
 vim.opt.undofile = true
 vim.opt.wildmode = { "lastused", "full" }
 vim.opt.winborder = "rounded"
 vim.opt.wrap = false
+vim.opt.splitright = true
+vim.opt.splitbelow = true
 vim.wo.number = true
 vim.wo.relativenumber = true
-vim.wo.signcolumn = 'yes'
+vim.wo.signcolumn = "yes"
 vim.o.updatetime = 250
 vim.o.timeoutlen = 300
-vim.o.completeopt = 'menuone,noselect'
+vim.o.completeopt = "menuone,noselect"
 vim.o.termguicolors = true
 vim.o.background = "dark" -- or "light" for light mode
 vim.diagnostic.config({ virtual_text = true })
-
+vim.opt.wildignore = '.hg,.svn,*~,*.png,*.jpg,*.gif,*.min.js,*.swp,*.o,vendor,dist,_site'
+vim.opt.vb = true
+vim.opt.listchars = 'tab:^ ,nbsp:¬,extends:»,precedes:«,trail:•'
 -- lsp
-local augroup = vim.api.nvim_create_augroup("erock.cfg", { clear = true })
 local autocmd = vim.api.nvim_create_autocmd
-autocmd("Filetype", { group = augroup, pattern = "make", command = "setlocal noexpandtab tabstop=4 shiftwidth=4" })
 autocmd("BufEnter", { -- disable automatic newline comment continuation
   callback = function()
     vim.opt.formatoptions = vim.opt.formatoptions:remove({ "c", "r", "o" })
   end,
 })
+
 local function setup_lsp()
   vim.lsp.enable({
     "gopls",
-    'lua_ls',
-    'yamlls',
-    'marksman',
-    'terraformls',
-    'bashls',
-    'ts_ls',
+    "lua_ls",
+    "yamlls",
+    "marksman",
+    "terraformls",
+    "bashls",
+    "ts_ls",
     "helm_ls",
-  })
-
-  autocmd("LspAttach", {
-    group = augroup,
-    callback = function(ev)
-      local bufopts = { noremap = true, silent = true, buffer = ev.buf }
-      vim.keymap.set("i", "<C-k>", vim.lsp.completion.get, bufopts) -- open completion menu manually
-      local client = assert(vim.lsp.get_client_by_id(ev.data.client_id))
-      local methods = vim.lsp.protocol.Methods
-      if client:supports_method(methods.textDocument_completion) then
-        vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
-      end
-    end,
   })
 
   autocmd("FileType", {
@@ -79,26 +70,30 @@ end
 vim.pack.add({
   "https://github.com/ellisonleao/gruvbox.nvim",
   "https://github.com/neovim/nvim-lspconfig",
-  "https://github.com/folke/which-key.nvim",
-  'https://github.com/nvim-mini/mini.nvim',
-  'https://github.com/nvim-treesitter/nvim-treesitter',
+  "https://github.com/nvim-mini/mini.nvim",
+  "https://github.com/nvim-treesitter/nvim-treesitter",
   "https://github.com/nvim-lua/plenary.nvim",
   "https://github.com/iwe-org/iwe.nvim",
   "https://github.com/lewis6991/gitsigns.nvim",
+  "https://github.com/folke/which-key.nvim",
   "https://github.com/qvalentin/helm-ls.nvim",
 })
 
 -- main setup
 setup_lsp()
 
-require("mini.pick").setup()
+require("mini.comment").setup()
+require("mini.completion").setup()
+require("mini.diff").setup()
 require("mini.files").setup()
 require("mini.git").setup()
-require("mini.diff").setup()
-require('mini.statusline').setup()
+require("mini.move").setup()
+require("mini.pick").setup()
+require("mini.statusline").setup()
+require("mini.surround").setup()
 require("mini.tabline").setup()
 require("mini.trailspace").setup()
-require('gitsigns').setup()
+require("gitsigns").setup()
 require("iwe").setup()
 require("nvim-treesitter").install({
   "helm",
@@ -108,7 +103,7 @@ require("nvim-treesitter").install({
 
 require("helm-ls").setup {
   settings = {
-    ['helm-ls'] = {
+    ["helm-ls"] = {
       yamlls = {
         path = "yaml-language-server",
       }
@@ -119,12 +114,27 @@ require("helm-ls").setup {
 vim.cmd("colorscheme gruvbox")
 
 -- keymap
-vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
+vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
+vim.keymap.set('v', '<C-h>', '<cmd>nohlsearch<cr>')
+vim.keymap.set('n', '<C-h>', '<cmd>nohlsearch<cr>')
+vim.keymap.set('v', '<C-c>', 'gcc', { silent = true })
+vim.keymap.set('n', '<C-c>', 'gcc', { silent = true })
+vim.keymap.set('n', 'n', 'nzz', { silent = true })
+vim.keymap.set('n', 'N', 'Nzz', { silent = true })
+vim.keymap.set('n', '*', '*zz', { silent = true })
+vim.keymap.set('n', '#', '#zz', { silent = true })
+vim.keymap.set('n', 'g*', 'g*zz', { silent = true })
+vim.keymap.set('n', 'j', 'gj')
+vim.keymap.set('n', 'k', 'gk')
+
+require("which-key").setup({
+  preset = "helix",
+})
 
 require("which-key").add({
-  { "<leader><leader>", '<c-^>', desc = "Toggle last buffer" },
-  { "<leader>[", ':bN<cr>', desc = "Go to previous buffer" },
-  { "<leader>]", ':bn<cr>', desc = "Go to next buffer" },
+  { "<leader><leader>", "<c-^>", desc = "Toggle last buffer" },
+  { "<leader>[", ":bN<cr>", desc = "Go to previous buffer" },
+  { "<leader>]", ":bn<cr>", desc = "Go to next buffer" },
   { "<leader>f", "<cmd>Pick files<cr>", desc = "Find File", mode = "n" },
   { "<leader>b", "<cmd>Pick buffers<cr>", desc = "Find Buffers", mode = "n" },
   { "<leader>'", "<cmd>Pick resume<cr>", desc = "Resume last find picker", mode = "n" },
@@ -142,6 +152,12 @@ require("which-key").add({
   { "<leader>de", vim.diagnostic.open_float, desc = "Open floating diagnostic message", mode = "n" },
   { "<leader>dl", vim.diagnostic.setloclist, desc = "Open diagnostics list", mode = "n" },
   { "<leader>dq", vim.diagnostic.setqflist, desc = "Open quick fix list", mode = "n" },
-  { "<A-k>", "<cmd>m .-2<cr>==", desc = "move line up", mode = "n" },
-  { "<A-j>", "<cmd>m .+1<cr>==", desc = "move line down", mode = "n" },
 })
+
+vim.api.nvim_create_autocmd(
+	'TextYankPost',
+	{
+		pattern = '*',
+		command = 'silent! lua vim.highlight.on_yank({ timeout = 500 })'
+	}
+)
