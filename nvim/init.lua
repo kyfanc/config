@@ -135,6 +135,13 @@ local function setup_lsp()
       end
     end,
   })
+
+  vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+    pattern = "Jenkinsfile.*",
+    callback = function()
+      vim.bo.filetype = "groovy"
+    end,
+  })
 end
 
 -- Package setup (nvim 0.12 native pack mechanism)
