@@ -123,6 +123,18 @@ local function setup_lsp()
     pattern = { "helm" },
     callback = function() vim.treesitter.start() end,
   })
+
+  -- temp fix for terraform-ls
+  -- https://github.com/neovim/neovim/issues/36257
+
+  vim.api.nvim_create_autocmd('LspAttach', {
+    callback = function(args)
+      local client = vim.lsp.get_client_by_id(args.data.client_id)
+      if client and client.server_capabilities and client.name == 'terraformls' then
+        client.server_capabilities.semanticTokensProvider = nil
+      end
+    end,
+  })
 end
 
 -- Package setup (nvim 0.12 native pack mechanism)
