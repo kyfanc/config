@@ -108,14 +108,14 @@ autocmd("BufEnter", {
 local function setup_lsp()
   -- Enable language servers for various file types
   vim.lsp.enable({
-    "gopls",         -- Go
-    "lua_ls",        -- Lua
-    "yamlls",        -- YAML
-    "marksman",      -- Markdown
-    "terraformls",   -- Terraform
-    "bashls",        -- Bash
-    "ts_ls",         -- TypeScript/JavaScript
-    "helm_ls",       -- Helm templates
+    "gopls",       -- Go
+    "lua_ls",      -- Lua
+    "yamlls",      -- YAML
+    "marksman",    -- Markdown
+    "terraformls", -- Terraform
+    "bashls",      -- Bash
+    "ts_ls",       -- TypeScript/JavaScript
+    "helm_ls",     -- Helm templates
   })
 
   -- Auto-enable TreeSitter for Helm files
@@ -168,6 +168,8 @@ require("mini.comment").setup()
 require("mini.completion").setup()
 -- Inline diffs
 require("mini.diff").setup()
+-- Extras especially for additional pickers features
+require('mini.extra').setup({})
 -- File browser
 require("mini.files").setup()
 -- Git operations
@@ -235,52 +237,67 @@ require("which-key").setup({
 
 require("which-key").add({
   -- Buffer navigation
-  { "<leader><leader>", "<c-^>",                           desc = "Toggle last buffer" },
-  { "<leader>[",        ":bN<cr>",                         desc = "Go to previous buffer" },
-  { "<leader>]",        ":bn<cr>",                         desc = "Go to next buffer" },
+  { "<leader><leader>", "<c-^>",                                           desc = "Toggle last buffer" },
+  { "<leader>[",        ":bN<cr>",                                         desc = "Go to previous buffer" },
+  { "<leader>]",        ":bn<cr>",                                         desc = "Go to next buffer" },
 
   -- Fuzzy finder (mini.pick)
-  { "<leader>f",        "<cmd>Pick files<cr>",             desc = "Find File",                         mode = "n" },
-  { "<leader>F",        "<cmd>Pick grep_live<cr>",         desc = "Find in all files",                 mode = "n" },
-  { "<leader>b",        "<cmd>Pick buffers<cr>",           desc = "Find Buffers",                      mode = "n" },
-  { "<leader>'",        "<cmd>Pick resume<cr>",            desc = "Resume last find picker",           mode = "n" },
+  { "<leader>fx",       "<cmd>Pick explorer<cr>",                          desc = "Find File with explorer",           mode = "n" },
+  { "<leader>ff",       "<cmd>Pick files<cr>",                             desc = "Find File",                         mode = "n" },
+  { "<leader>fF",       "<cmd>Pick grep_live<cr>",                         desc = "Find in all files",                 mode = "n" },
+  { "<leader>fb",       "<cmd>Pick buffers<cr>",                           desc = "Find Buffers",                      mode = "n" },
+  { "<leader>fs",       "<cmd>Pick lsp scope='document_symbol'<cr>",       desc = "Find symbols in document",          mode = "n" },
+  { "<leader>fw",       "<cmd>Pick lsp scope='workspace_symbol_live'<cr>", desc = "Find symbols in workspace",         mode = "n" },
+  { "<leader>fr",       "<cmd>Pick lsp scope='references'<cr>",            desc = "Find references",                   mode = "n" },
+  { "<leader>fi",       "<cmd>Pick lsp scope='implementation'<cr>",        desc = "Find implementations",              mode = "n" },
+  { "<leader>fd",       "<cmd>Pick lsp scope='definition'<cr>",            desc = "Find definitions",                  mode = "n" },
+  { "<leader>fD",       "<cmd>Pick lsp scope='declaration'<cr>",           desc = "Find declarations",                 mode = "n" },
+  { "<leader>ft",       "<cmd>Pick lsp scope='type_definition'<cr>",       desc = "Find type definitions",             mode = "n" },
+  { "<leader>fc",       "<cmd>Pick commands<cr>",                          desc = "Find commands",                     mode = "n" },
+  { "<leader>fj",       "<cmd>Pick list scope='jump'<cr>",                 desc = "Find jumplist",                     mode = "n" },
+  { "<leader>fq",       "<cmd>Pick list scope='quickfix'<cr>",             desc = "Find quickfix",                     mode = "n" },
+  { "<leader>fc",       "<cmd>Pick list scope='change'<cr>",               desc = "Find change",                       mode = "n" },
+  { "<leader>fl",       "<cmd>Pick list scope='location'<cr>",             desc = "Find location",                     mode = "n" },
+  { "<leader>fm",       "<cmd>Pick marks<cr>",                             desc = "Find marks",                        mode = "n" },
+  { "<leader>fk",       "<cmd>Pick keymaps<cr>",                           desc = "Find keymaps",                      mode = "n" },
+  { "<leader>'",        "<cmd>Pick resume<cr>",                            desc = "Resume last find picker",           mode = "n" },
 
   -- LSP actions
-  { "<leader>a",        vim.lsp.buf.code_action,           desc = "LSP Code action",                   mode = "n" },
-  { "<leader>h",        vim.lsp.buf.hover,                 desc = "LSP Hover",                         mode = "n" },
-  { "<leader>s",        vim.lsp.buf.signature_help,        desc = "LSP Signature",                     mode = "n" },
-  { "<leader>S",        vim.lsp.buf.workspace_symbol,      desc = "LSP Workspace symbol",              mode = "n" },
-  { "<leader>=",        vim.lsp.buf.format,                desc = "LSP format",                        mode = "n" },
+  { "<leader>a",        vim.lsp.buf.code_action,                           desc = "LSP Code action",                   mode = "n" },
+  { "<leader>h",        vim.lsp.buf.hover,                                 desc = "LSP Hover",                         mode = "n" },
+  { "<leader>s",        vim.lsp.buf.signature_help,                        desc = "LSP Signature",                     mode = "n" },
+  { "<leader>S",        "<cmd>Pick lsp scope='workspace_symbol'<cr>",      desc = "LSP Workspace symbol",              mode = "n" },
+  { "<leader>=",        vim.lsp.buf.format,                                desc = "LSP format",                        mode = "n" },
+  { "==",               vim.lsp.buf.format,                                desc = "LSP format",                        mode = "n" },
+  { "<leader>r",        vim.lsp.buf.rename,                                desc = "LSP Rename",                        mode = "n" },
 
   -- Navigation (goto)
-  { "<leader>g",        group = "Goto",                    desc = "Goto",                              mode = "n" },
-  { "<leader>gd",       vim.lsp.buf.declaration,           desc = "Goto declaration",                  mode = "n" },
-  { "<leader>gD",       vim.lsp.buf.type_definition,       desc = "Goto type definition",              mode = "n" },
-  { "<leader>gi",       vim.lsp.buf.implementation,        desc = "Goto implementations",              mode = "n" },
-  { "<leader>gr",       vim.lsp.buf.references,            desc = "Goto references",                   mode = "n" },
-
-  -- Rename
-  { "<leader>r",        vim.lsp.buf.rename,                desc = "LSP Rename",                        mode = "n" },
+  { "<leader>g",        group = "Goto",                                    desc = "Goto",                              mode = "n" },
+  { "<leader>gd",       vim.lsp.buf.declaration,                           desc = "Goto declaration",                  mode = "n" },
+  { "<leader>gD",       vim.lsp.buf.type_definition,                       desc = "Goto type definition",              mode = "n" },
+  { "<leader>gi",       vim.lsp.buf.implementation,                        desc = "Goto implementations",              mode = "n" },
+  { "<leader>gr",       vim.lsp.buf.references,                            desc = "Goto references",                   mode = "n" },
 
   -- Git operations (gitsigns)
-  { "<leader>G",        group = "Git",                     desc = "Git",                               mode = "n" },
-  { "<leader>Gb",       "<cmd>Gitsigns blame_line<cr>",    desc = "Git blame line",                    mode = "n" },
-  { "<leader>GB",       "<cmd>Gitsigns blame<cr>",         desc = "Git blame",                         mode = "n" },
-  { "<leader>Gd",       "<cmd>Gitsigns diffthis<cr>",      desc = "Git diff current file",             mode = "n" },
-  { "<leader>Gs",       "<cmd>Gitsigns stage_hunk<cr>",    desc = "Git stage hunk",                    mode = "n" },
-  { "<leader>GS",       "<cmd>Gitsigns stage_buffer<cr>",  desc = "Git stage file",                    mode = "n" },
-  { "<leader>Gu",       "<cmd>Gitsigns reset_hunk<cr>",    desc = "Git reset hunk",                    mode = "n" },
-  { "<leader>GU",       "<cmd>Gitsigns reset_buffer<cr>",  desc = "Git reset file",                    mode = "n" },
-  { "<leader>Gn",       "<cmd>Gitsigns next_bunk<cr>",     desc = "Git next hunk",                     mode = "n" },
-  { "<leader>GN",       "<cmd>Gitsigns previous_bunk<cr>", desc = "Git previous hunk",                 mode = "n" },
+  { "<leader>G",        group = "Git",                                     desc = "Git",                               mode = "n" },
+  { "<leader>Gb",       "<cmd>Gitsigns blame_line<cr>",                    desc = "Git blame line",                    mode = "n" },
+  { "<leader>GB",       "<cmd>Gitsigns blame<cr>",                         desc = "Git blame",                         mode = "n" },
+  { "<leader>Gd",       "<cmd>Gitsigns diffthis<cr>",                      desc = "Git diff current file",             mode = "n" },
+  { "<leader>Gs",       "<cmd>Gitsigns stage_hunk<cr>",                    desc = "Git stage hunk",                    mode = "n" },
+  { "<leader>GS",       "<cmd>Gitsigns stage_buffer<cr>",                  desc = "Git stage file",                    mode = "n" },
+  { "<leader>Gu",       "<cmd>Gitsigns reset_hunk<cr>",                    desc = "Git reset hunk",                    mode = "n" },
+  { "<leader>GU",       "<cmd>Gitsigns reset_buffer<cr>",                  desc = "Git reset file",                    mode = "n" },
+  { "<leader>Gn",       "<cmd>Gitsigns next_bunk<cr>",                     desc = "Git next hunk",                     mode = "n" },
+  { "<leader>GN",       "<cmd>Gitsigns previous_bunk<cr>",                 desc = "Git previous hunk",                 mode = "n" },
+  { "<leader>Gf",       "<cmd>Pick git_hunks<cr>",                         desc = "Git find hunks",                    mode = "n" },
 
   -- Diagnostics
-  { "<leader>d",        group = "Diagnostic",              desc = "Diagnostic",                        mode = "n" },
-  { "<leader>db",       vim.diagnostic.goto_prev,          desc = "Go to previous diagnostic message", mode = "n" },
-  { "<leader>df",       vim.diagnostic.goto_next,          desc = "Go to next diagnostic message",     mode = "n" },
-  { "<leader>de",       vim.diagnostic.open_float,         desc = "Open floating diagnostic message",  mode = "n" },
-  { "<leader>dl",       vim.diagnostic.setloclist,         desc = "Open diagnostics list",             mode = "n" },
-  { "<leader>dq",       vim.diagnostic.setqflist,          desc = "Open quick fix list",               mode = "n" },
+  { "<leader>d",        group = "Diagnostic",                              desc = "Diagnostic",                        mode = "n" },
+  { "<leader>db",       vim.diagnostic.goto_prev,                          desc = "Go to previous diagnostic message", mode = "n" },
+  { "<leader>df",       vim.diagnostic.goto_next,                          desc = "Go to next diagnostic message",     mode = "n" },
+  { "<leader>de",       vim.diagnostic.open_float,                         desc = "Open floating diagnostic message",  mode = "n" },
+  { "<leader>dl",       "<cmd>Pick diagnostic<cr>",                        desc = "Open diagnostics list",             mode = "n" },
+  { "<leader>dq",       vim.diagnostic.setqflist,                          desc = "Open quick fix list",               mode = "n" },
 })
 
 -- Highlight on yank for visual feedback
