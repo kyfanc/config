@@ -111,7 +111,7 @@ local function setup_lsp()
     "gopls",       -- Go
     "lua_ls",      -- Lua
     "yamlls",      -- YAML
-    "marksman",    -- Markdown
+    -- "marksman",    -- Markdown
     "terraformls", -- Terraform
     "bashls",      -- Bash
     "ts_ls",       -- TypeScript/JavaScript
