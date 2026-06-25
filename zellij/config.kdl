@@ -147,8 +147,8 @@ keybinds clear-defaults=true {
         bind "Ctrl h" { SwitchToMode "move"; }
     }
     shared_except "locked" "session" {
-        bind "Ctrl l" { SwitchToMode "session"; }
-        bind "Ctrl o" { SwitchToMode "session"; }
+        bind "Alt l" { SwitchToMode "session"; }
+        bind "Alt o" { SwitchToMode "session"; }
     }
     shared_except "locked" "scroll" "search" {
         bind "Ctrl s" { SwitchToMode "scroll"; }
