@@ -5,158 +5,56 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 -- Core editor settings
--- Reload file when changed externally
 vim.opt.autoread = true
--- Backspace behavior
 vim.opt.backspace = "indent,eol,start"
--- Use system clipboard
 vim.opt.clipboard = "unnamedplus"
--- Visual guide at 100 columns
 vim.opt.colorcolumn = "100"
--- Use spaces instead of tabs
 vim.opt.expandtab = true
--- Indent width for operations
 vim.opt.shiftwidth = 2
--- Spaces per tab in insert mode
 vim.opt.softtabstop = 2
--- Display width of tabs
 vim.opt.tabstop = 2
--- Keep cursor centered with 2 line padding
 vim.opt.scrolloff = 2
--- Disable swap files
 vim.opt.swapfile = false
--- Persist undo history
 vim.opt.undofile = true
-
--- Search behavior
--- Case-insensitive search
 vim.opt.ignorecase = true
--- Case-sensitive if uppercase used
 vim.opt.smartcase = true
--- Highlight search results
 vim.opt.hlsearch = true
-
--- UI/Display
--- Show absolute line numbers
 vim.opt.number = true
--- Show relative line numbers
 vim.wo.relativenumber = true
--- Always show sign column (LSP, git)
 vim.opt.signcolumn = "yes"
--- Show whitespace characters
 vim.opt.list = true
--- Whitespace markers
 vim.opt.listchars = 'tab:^ ,nbsp:¬,extends:»,precedes:«,trail:•'
--- Disable line wrapping
 vim.opt.wrap = false
--- Rounded borders on windows
 vim.opt.winborder = "rounded"
--- Open splits on right
 vim.opt.splitright = true
--- Open splits below
 vim.opt.splitbelow = true
-
--- Completion menu
--- Completion behavior
 vim.opt.completeopt = { "menuone", "noselect", "popup" }
--- Completion menu height
 vim.opt.pumheight = 15
--- Don't auto-select completion
-vim.o.completeopt = "menuone,noselect"
-
--- Mouse and input
--- Enable mouse in all modes
 vim.opt.mouse = "a"
--- Shell for commands
 vim.opt.shell = "/bin/bash"
--- ms to wait for mapped sequence
 vim.o.timeoutlen = 300
-
--- Folding and other options
--- Open all folds by default
 vim.opt.foldlevelstart = 99
--- Fold based on indentation
 vim.opt.foldmethod = "indent"
--- Command line completion
 vim.opt.wildmode = { "lastused", "full" }
--- Ignore patterns
 vim.opt.wildignore = '.hg,.svn,*~,*.png,*.jpg,*.gif,*.min.js,*.swp,*.o,vendor,dist,_site'
--- Visual bell instead of sound
 vim.opt.vb = true
-
--- Colors and diagnostics
--- Enable 24-bit color
 vim.o.termguicolors = true
--- Dark theme (or "light")
 vim.o.background = "dark"
--- ms for swap file and CursorHold
 vim.o.updatetime = 250
--- Show diagnostics inline
 vim.diagnostic.config({ virtual_text = true })
 
--- LSP and autocmds
 local autocmd = vim.api.nvim_create_autocmd
 
--- Disable automatic comment continuation on new lines
 autocmd("BufEnter", {
   callback = function()
     vim.opt.formatoptions = vim.opt.formatoptions:remove({ "c", "r", "o" })
   end,
 })
 
--- LSP configuration
-local function setup_lsp()
-  -- Enable language servers for various file types
-  vim.lsp.enable({
-    "gopls",       -- Go
-    "lua_ls",      -- Lua
-    "yamlls",      -- YAML
-    -- "marksman",    -- Markdown
-    "terraformls", -- Terraform
-    "bashls",      -- Bash
-    "ts_ls",       -- TypeScript/JavaScript
-    "helm_ls",     -- Helm templates
-  })
-
-  -- Auto-enable TreeSitter for Helm files
-  autocmd("FileType", {
-    pattern = { "helm" },
-    callback = function() vim.treesitter.start() end,
-  })
-
-  -- temp fix for terraform-ls
-  -- https://github.com/neovim/neovim/issues/36257
-
-  vim.api.nvim_create_autocmd('LspAttach', {
-    callback = function(args)
-      local client = vim.lsp.get_client_by_id(args.data.client_id)
-      if client and client.server_capabilities and client.name == 'terraformls' then
-        client.server_capabilities.semanticTokensProvider = nil
-      end
-    end,
-  })
-
-  vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
-    pattern = "Jenkinsfile.*",
-    callback = function()
-      vim.bo.filetype = "groovy"
-    end,
-  })
-end
-
--- Package setup (nvim 0.12 native pack mechanism)
--- Color scheme
--- LSP configuration
--- Minimal plugins collection
--- Syntax highlighting
--- Utility library
--- Editing features
--- Git integration
--- Keybinding helper
--- Helm LSP integration
+-- Package setup 
 vim.pack.add({
   "https://github.com/ellisonleao/gruvbox.nvim",
-  "https://github.com/neovim/nvim-lspconfig",
+  "https://github.com/neovim/nvim-lspconfig", -- Used strictly for root_dir/cmd definitions
   "https://github.com/nvim-mini/mini.nvim",
   "https://github.com/nvim-treesitter/nvim-treesitter",
   "https://github.com/nvim-lua/plenary.nvim",
@@ -166,152 +64,165 @@ vim.pack.add({
   "https://github.com/qvalentin/helm-ls.nvim",
 })
 
--- Initialize LSP servers
-setup_lsp()
-
--- Toggle comments with gc
-require("mini.comment").setup()
--- Word completion
-require("mini.completion").setup()
--- Inline diffs
-require("mini.diff").setup()
--- Extras especially for additional pickers features
-require('mini.extra').setup({})
--- File browser
-require("mini.files").setup()
--- Git operations
-require("mini.git").setup()
--- Move selection with Alt+hjkl
-require("mini.move").setup()
--- Fuzzy finder
-require("mini.pick").setup()
--- Statusline
-require("mini.statusline").setup()
--- Add/delete/change surrounds with sa/sd/sr
-require("mini.surround").setup()
--- Tab line
-require("mini.tabline").setup()
--- Highlight trailing whitespace
-require("mini.trailspace").setup()
-
--- Git signs in sign column
-require("gitsigns").setup()
--- Improved word/expression editing
-require("iwe").setup()
--- Install parsers for syntax highlighting
-require("nvim-treesitter").install({
-  "helm",
-  "gotmpl",
-  "yaml",
+-- Configure LSP Servers via v0.11/0.12 native API
+-- Modify default settings BEFORE enabling them
+vim.lsp.config('yamlls', {
+  settings = {
+    yaml = {
+      schemas = {
+        kubernetes = "/*.yaml",
+        ["http://json.schemastore.org/github-workflow"] = ".github/workflows/*",
+        ["http://json.schemastore.org/kustomization"] = "kustomization.{yml,yaml}",
+      },
+    },
+  }
 })
 
--- Helm language server configuration
+vim.lsp.config('rust_analyzer', {
+  settings = {
+    ['rust-analyzer'] = {
+      diagnostics = { enable = false }
+    }
+  }
+})
+
+-- Enable servers using native API
+vim.lsp.enable({
+  "gopls", "lua_ls", "yamlls", "terraformls", "bashls", "ts_ls", 
+  "helm_ls", "rust_analyzer", "csharp_ls", "pyright"
+})
+
+-- LSP Attach Hook: Buffer-local keybindings and Inlay Hints
+autocmd('LspAttach', {
+  desc = 'LSP actions',
+  callback = function(args)
+    local buf = args.buf
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+
+    -- Enable native inlay hints if server supports it (Go, Rust, C#, TS)
+    if client and client.server_capabilities.inlayHintProvider then
+      vim.lsp.inlay_hint.enable(true, { bufnr = buf })
+    end
+
+    -- Fix for Terraform tokens
+    if client and client.name == 'terraformls' then
+      client.server_capabilities.semanticTokensProvider = nil
+    end
+
+    -- Buffer-local WhichKey LSP mappings
+    require("which-key").add({
+      { "<leader>l", group = "LSP/Refactor", buffer = buf, mode = "n" },
+      { "<leader>la", vim.lsp.buf.code_action, desc = "Code Action", buffer = buf, mode = "n" },
+      { "<leader>lr", vim.lsp.buf.rename, desc = "Rename Symbol", buffer = buf, mode = "n" },
+      { "<leader>lf", vim.lsp.buf.format, desc = "Format Document", buffer = buf, mode = "n" },
+      { "<leader>ls", vim.lsp.buf.signature_help, desc = "Signature Help", buffer = buf, mode = "n" },
+      { "<leader>lh", vim.lsp.buf.hover, desc = "Hover Docs", buffer = buf, mode = "n" },
+    })
+  end,
+})
+
+-- Auto-enable TreeSitter for Helm
+autocmd("FileType", {
+  pattern = { "helm" },
+  callback = function() vim.treesitter.start() end,
+})
+
+autocmd({ "BufRead", "BufNewFile" }, {
+  pattern = "Jenkinsfile.*",
+  callback = function() vim.bo.filetype = "groovy" end,
+})
+
+-- Initialize plugins
+require("mini.comment").setup()
+require("mini.completion").setup()
+require("mini.diff").setup()
+require('mini.extra').setup({})
+require("mini.files").setup()
+require("mini.git").setup()
+require("mini.move").setup()
+require("mini.pick").setup()
+require("mini.statusline").setup()
+require("mini.surround").setup()
+require("mini.tabline").setup()
+require("mini.trailspace").setup()
+require("gitsigns").setup()
+require("iwe").setup()
+
+-- Install parsers
+require("nvim-treesitter").install({
+  "helm", "gotmpl", "yaml", "python", "c_sharp", "go", "bash", "rust"
+})
+
 require("helm-ls").setup {
   settings = {
     ["helm-ls"] = {
-      yamlls = {
-        path = "yaml-language-server",
-      }
+      yamlls = { path = "yaml-language-server" }
     }
   }
 }
 
--- Color scheme
 vim.cmd("colorscheme gruvbox")
 
 -- Core keybindings
--- Space as leader
 vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
--- Clear search highlight
 vim.keymap.set('n', '<esc>', '<cmd>nohlsearch<cr>')
 
--- Center view on search navigation
+-- Centered Navigation
 vim.keymap.set('n', 'n', 'nzz', { silent = true })
 vim.keymap.set('n', 'N', 'Nzz', { silent = true })
 vim.keymap.set('n', '*', '*zz', { silent = true })
 vim.keymap.set('n', '#', '#zz', { silent = true })
 vim.keymap.set('n', 'g*', 'g*zz', { silent = true })
-
--- Navigate wrapped lines naturally
 vim.keymap.set('n', 'j', 'gj')
 vim.keymap.set('n', 'k', 'gk')
 
--- Keybinding help and leader key mappings
--- Use helix-style key hints
-require("which-key").setup({
-  preset = "helix",
-})
-
+-- Global WhichKey mappings (Non-LSP dependencies)
+require("which-key").setup({ preset = "helix" })
 require("which-key").add({
-  -- Buffer navigation
-  { "<leader><leader>", "<c-^>",                                           desc = "Toggle last buffer" },
-  { "<leader>[",        ":bN<cr>",                                         desc = "Go to previous buffer" },
-  { "<leader>]",        ":bn<cr>",                                         desc = "Go to next buffer" },
+  { "<leader><leader>", "<c-^>", desc = "Toggle last buffer" },
+  { "<leader>[", ":bN<cr>", desc = "Go to previous buffer" },
+  { "<leader>]", ":bn<cr>", desc = "Go to next buffer" },
+-- Buffer & Window Management
+  { "<leader>b", group = "Buffer/Window", mode = "n" },
+  { "<leader>bo", "<cmd>%bd|e#|bd#<cr>", desc = "Close All Other Buffers", mode = "n" },
+  { "<leader>bn", "<cmd>bnext<cr>", desc = "Next Buffer", mode = "n" },
+  { "<leader>bp", "<cmd>bprevious<cr>", desc = "Previous Buffer", mode = "n" },
+  { "<leader>bs", "<cmd>split<cr>", desc = "Split Window Horizontally", mode = "n" },
+  { "<leader>bv", "<cmd>vsplit<cr>", desc = "Split Window Vertically", mode = "n" },
+  { "<leader>bc", "<cmd>close<cr>", desc = "Close Current Window", mode = "n" },
 
-  -- Fuzzy finder (mini.pick)
-  { "<leader>fx",       "<cmd>Pick explorer<cr>",                          desc = "Find File with explorer",           mode = "n" },
-  { "<leader>ff",       "<cmd>Pick files<cr>",                             desc = "Find File",                         mode = "n" },
-  { "<leader>fF",       "<cmd>Pick grep_live<cr>",                         desc = "Find in all files",                 mode = "n" },
-  { "<leader>fb",       "<cmd>Pick buffers<cr>",                           desc = "Find Buffers",                      mode = "n" },
-  { "<leader>fs",       "<cmd>Pick lsp scope='document_symbol'<cr>",       desc = "Find symbols in document",          mode = "n" },
-  { "<leader>fw",       "<cmd>Pick lsp scope='workspace_symbol_live'<cr>", desc = "Find symbols in workspace",         mode = "n" },
-  { "<leader>fr",       "<cmd>Pick lsp scope='references'<cr>",            desc = "Find references",                   mode = "n" },
-  { "<leader>fi",       "<cmd>Pick lsp scope='implementation'<cr>",        desc = "Find implementations",              mode = "n" },
-  { "<leader>fd",       "<cmd>Pick lsp scope='definition'<cr>",            desc = "Find definitions",                  mode = "n" },
-  { "<leader>fD",       "<cmd>Pick lsp scope='declaration'<cr>",           desc = "Find declarations",                 mode = "n" },
-  { "<leader>ft",       "<cmd>Pick lsp scope='type_definition'<cr>",       desc = "Find type definitions",             mode = "n" },
-  { "<leader>fc",       "<cmd>Pick commands<cr>",                          desc = "Find commands",                     mode = "n" },
-  { "<leader>fj",       "<cmd>Pick list scope='jump'<cr>",                 desc = "Find jumplist",                     mode = "n" },
-  { "<leader>fq",       "<cmd>Pick list scope='quickfix'<cr>",             desc = "Find quickfix",                     mode = "n" },
-  { "<leader>fc",       "<cmd>Pick list scope='change'<cr>",               desc = "Find change",                       mode = "n" },
-  { "<leader>fl",       "<cmd>Pick list scope='location'<cr>",             desc = "Find location",                     mode = "n" },
-  { "<leader>fm",       "<cmd>Pick marks<cr>",                             desc = "Find marks",                        mode = "n" },
-  { "<leader>fk",       "<cmd>Pick keymaps<cr>",                           desc = "Find keymaps",                      mode = "n" },
-  { "<leader>'",        "<cmd>Pick resume<cr>",                            desc = "Resume last find picker",           mode = "n" },
-
-  -- LSP actions
-  { "<leader>a",        vim.lsp.buf.code_action,                           desc = "LSP Code action",                   mode = "n" },
-  { "<leader>h",        vim.lsp.buf.hover,                                 desc = "LSP Hover",                         mode = "n" },
-  { "<leader>s",        vim.lsp.buf.signature_help,                        desc = "LSP Signature",                     mode = "n" },
-  { "<leader>S",        "<cmd>Pick lsp scope='workspace_symbol'<cr>",      desc = "LSP Workspace symbol",              mode = "n" },
-  { "<leader>=",        vim.lsp.buf.format,                                desc = "LSP format",                        mode = "n" },
-  { "==",               vim.lsp.buf.format,                                desc = "LSP format",                        mode = "n" },
-  { "<leader>r",        vim.lsp.buf.rename,                                desc = "LSP Rename",                        mode = "n" },
-
-  -- Navigation (goto)
-  { "<leader>g",        group = "Goto",                                    desc = "Goto",                              mode = "n" },
-  { "<leader>gd",       vim.lsp.buf.declaration,                           desc = "Goto declaration",                  mode = "n" },
-  { "<leader>gD",       vim.lsp.buf.type_definition,                       desc = "Goto type definition",              mode = "n" },
-  { "<leader>gi",       vim.lsp.buf.implementation,                        desc = "Goto implementations",              mode = "n" },
-  { "<leader>gr",       vim.lsp.buf.references,                            desc = "Goto references",                   mode = "n" },
-
-  -- Git operations (gitsigns)
-  { "<leader>G",        group = "Git",                                     desc = "Git",                               mode = "n" },
-  { "<leader>Gb",       "<cmd>Gitsigns blame_line<cr>",                    desc = "Git blame line",                    mode = "n" },
-  { "<leader>GB",       "<cmd>Gitsigns blame<cr>",                         desc = "Git blame",                         mode = "n" },
-  { "<leader>Gd",       "<cmd>Gitsigns diffthis<cr>",                      desc = "Git diff current file",             mode = "n" },
-  { "<leader>Gs",       "<cmd>Gitsigns stage_hunk<cr>",                    desc = "Git stage hunk",                    mode = "n" },
-  { "<leader>GS",       "<cmd>Gitsigns stage_buffer<cr>",                  desc = "Git stage file",                    mode = "n" },
-  { "<leader>Gu",       "<cmd>Gitsigns reset_hunk<cr>",                    desc = "Git reset hunk",                    mode = "n" },
-  { "<leader>GU",       "<cmd>Gitsigns reset_buffer<cr>",                  desc = "Git reset file",                    mode = "n" },
-  { "<leader>Gn",       "<cmd>Gitsigns next_bunk<cr>",                     desc = "Git next hunk",                     mode = "n" },
-  { "<leader>GN",       "<cmd>Gitsigns previous_bunk<cr>",                 desc = "Git previous hunk",                 mode = "n" },
-  { "<leader>Gf",       "<cmd>Pick git_hunks<cr>",                         desc = "Git find hunks",                    mode = "n" },
+-- Find / Explore
+  { "<leader>f", group = "Find/Explore", mode = "n" },
+  { "<leader>ff", "<cmd>Pick files<cr>", desc = "Find Files", mode = "n" },
+  { "<leader>fg", "<cmd>Pick grep_live<cr>", desc = "Grep Workspace (Live)", mode = "n" },
+  { "<leader>fw", function() MiniPick.builtin.grep({ pattern = vim.fn.expand('<cword>') }) end, desc = "Grep Word Under Cursor", mode = "n" },
+  { "<leader>fr", "<cmd>Pick resume<cr>", desc = "Resume Last Picker", mode = "n" },
+  { "<leader>fb", "<cmd>Pick buffers<cr>", desc = "Find Buffers", mode = "n" },
+  { "<leader>fs", "<cmd>Pick lsp scope='document_symbol'<cr>", desc = "Find Document Symbols", mode = "n" },
+  { "<leader>fS", "<cmd>Pick lsp scope='workspace_symbol_live'<cr>", desc = "Find Workspace Symbols", mode = "n" },
+  { "<leader>fq", "<cmd>Pick list scope='quickfix'<cr>", desc = "Find Quickfix", mode = "n" },
+  { "<leader>fh", "<cmd>Pick help<cr>", desc = "Find Help Tags", mode = "n" },
+  { "<leader>fc", "<cmd>Pick commands<cr>", desc = "Find Commands", mode = "n" },
+  { "<leader>fx", "<cmd>Pick explorer<cr>", desc = "File Explorer", mode = "n" },  -- Git
+  { "<leader>G", group = "Git", mode = "n" },
+  { "<leader>Gb", "<cmd>Gitsigns blame_line<cr>", desc = "Blame line", mode = "n" },
+  { "<leader>Gd", "<cmd>Gitsigns diffthis<cr>", desc = "Diff current file", mode = "n" },
+  { "<leader>Gs", "<cmd>Gitsigns stage_hunk<cr>", desc = "Stage hunk", mode = "n" },
+  { "<leader>Gu", "<cmd>Gitsigns reset_hunk<cr>", desc = "Reset hunk", mode = "n" },
+  { "<leader>Gf", "<cmd>Pick git_hunks<cr>", desc = "Find hunks", mode = "n" },
 
   -- Diagnostics
-  { "<leader>d",        group = "Diagnostic",                              desc = "Diagnostic",                        mode = "n" },
-  { "<leader>db",       vim.diagnostic.goto_prev,                          desc = "Go to previous diagnostic message", mode = "n" },
-  { "<leader>df",       vim.diagnostic.goto_next,                          desc = "Go to next diagnostic message",     mode = "n" },
-  { "<leader>de",       vim.diagnostic.open_float,                         desc = "Open floating diagnostic message",  mode = "n" },
-  { "<leader>dl",       "<cmd>Pick diagnostic<cr>",                        desc = "Open diagnostics list",             mode = "n" },
-  { "<leader>dq",       vim.diagnostic.setqflist,                          desc = "Open quick fix list",               mode = "n" },
+  { "<leader>d", group = "Diagnostic", mode = "n" },
+  { "<leader>de", vim.diagnostic.open_float, desc = "Floating diagnostic", mode = "n" },
+  { "<leader>dl", "<cmd>Pick diagnostic<cr>", desc = "Diagnostics list", mode = "n" },
+
+  -- Toggle
+  { "<leader>t", group = "Toggle", mode = "n" },
+  { "<leader>tw", "<cmd>set wrap!<cr>", desc = "Toggle wrap", mode = "n" },
+  { "<leader>ti", function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end, desc = "Toggle Inlay Hints", mode = "n" },
 })
 
--- Highlight on yank for visual feedback
-vim.api.nvim_create_autocmd(
-  'TextYankPost',
-  {
-    pattern = '*',
-    command = 'silent! lua vim.highlight.on_yank({ timeout = 500 })'
-  }
-)
+vim.api.nvim_create_autocmd('TextYankPost', {
+  pattern = '*',
+  command = 'silent! lua vim.highlight.on_yank({ timeout = 500 })'
+})
