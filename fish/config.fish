@@ -7,6 +7,7 @@ fish_add_path /opt/homebrew/opt/findutils/libexec/gnubin
 fish_add_path /opt/homebrew/opt/grep/libexec/gnubin
 fish_add_path ~/go/bin
 fish_add_path ~/.cargo/bin
+fish_add_path ~/.local/bin
 
 # add custom fish function folder
 set -Up fish_function_path ~/.config/fish/functions/custom
