@@ -88,8 +88,16 @@ vim.lsp.config('rust_analyzer', {
 
 -- Enable servers using native API
 vim.lsp.enable({
-  "gopls", "lua_ls", "yamlls", "terraformls", "bashls", "ts_ls", 
-  "helm_ls", "rust_analyzer", "csharp_ls", "pyright"
+  "gopls",
+  "lua_ls",
+  "yamlls",
+  "terraformls",
+  "bashls",
+  "ts_ls",
+  "helm_ls",
+  "rust_analyzer",
+  "roslyn_ls",
+  "pylsp"
 })
 
 -- LSP Attach Hook: Buffer-local keybindings and Inlay Hints
