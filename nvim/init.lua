@@ -206,6 +206,8 @@ require("which-key").add({
   { "<leader>fx", "<cmd>Pick explorer<cr>", desc = "File Explorer", mode = "n" },  -- Git
   { "<leader>G", group = "Git", mode = "n" },
   { "<leader>Gb", "<cmd>Gitsigns blame_line<cr>", desc = "Blame line", mode = "n" },
+  { "<leader>GB", "<cmd>Gitsigns blame<cr>", desc = "Blame file", mode = "n" },
+  { "<leader>Gc", "<cmd>Gitsigns show_commit<cr>", desc = "Show commit", mode = "n" },
   { "<leader>Gd", "<cmd>Gitsigns diffthis<cr>", desc = "Diff current file", mode = "n" },
   { "<leader>Gs", "<cmd>Gitsigns stage_hunk<cr>", desc = "Stage hunk", mode = "n" },
   { "<leader>Gu", "<cmd>Gitsigns reset_hunk<cr>", desc = "Reset hunk", mode = "n" },
