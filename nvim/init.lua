@@ -97,7 +97,8 @@ vim.lsp.enable({
   "helm_ls",
   "rust_analyzer",
   "roslyn_ls",
-  "pylsp"
+  "pyright",
+  "ruff",
 })
 
 -- LSP Attach Hook: Buffer-local keybindings and Inlay Hints
@@ -110,6 +111,12 @@ autocmd('LspAttach', {
     -- Enable native inlay hints if server supports it (Go, Rust, C#, TS)
     if client and client.server_capabilities.inlayHintProvider then
       vim.lsp.inlay_hint.enable(true, { bufnr = buf })
+    end
+
+    -- Modern nvim-lspconfig setup utilizing ruff's native server execution
+    -- Disable hover in favor of your primary language server (e.g. pyright)
+    if client and client.name == 'ruff' then
+      client.server_capabilities.hoverProvider = false
     end
 
     -- Fix for Terraform tokens
