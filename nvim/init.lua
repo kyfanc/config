@@ -62,6 +62,8 @@ vim.pack.add({
   "https://github.com/lewis6991/gitsigns.nvim",
   "https://github.com/folke/which-key.nvim",
   "https://github.com/qvalentin/helm-ls.nvim",
+  "https://github.com/NeogitOrg/neogit",
+  "https://github.com/sindrets/diffview.nvim",
 })
 
 -- Configure LSP Servers via v0.11/0.12 native API
@@ -221,6 +223,7 @@ require("which-key").add({
   { "<leader>fc", "<cmd>Pick commands<cr>", desc = "Find Commands", mode = "n" },
   { "<leader>fx", "<cmd>Pick explorer<cr>", desc = "File Explorer", mode = "n" },  -- Git
   { "<leader>G", group = "Git", mode = "n" },
+  { "<leader>Gg", "<cmd>Neogit<cr>", desc = "Neogit Status Canvas", mode = "n" },
   { "<leader>Gb", "<cmd>Gitsigns blame_line<cr>", desc = "Blame line", mode = "n" },
   { "<leader>GB", "<cmd>Gitsigns blame<cr>", desc = "Blame file", mode = "n" },
   { "<leader>Gc", "<cmd>Gitsigns show_commit<cr>", desc = "Show commit", mode = "n" },

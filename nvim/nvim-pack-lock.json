@@ -8,6 +8,10 @@
       "rev": "a12fd5672110c8aa7e3c8419e28c96943ca179be",
       "src": "https://github.com/github/copilot.vim"
     },
+    "diffview.nvim": {
+      "rev": "4516612fe98ff56ae0415a259ff6361a89419b0a",
+      "src": "https://github.com/sindrets/diffview.nvim"
+    },
     "gitsigns.nvim": {
       "rev": "0f00d07c2c3106ba6abd594ac1c17f211141b7b5",
       "src": "https://github.com/lewis6991/gitsigns.nvim"
@@ -43,6 +47,10 @@
     "mini.pick": {
       "rev": "fe079c2bd894a5ee70b62f23d819620ef40c4949",
       "src": "https://github.com/nvim-mini/mini.pick"
+    },
+    "neogit": {
+      "rev": "43ea1a0854052e583f647e0b35879f0158a70a78",
+      "src": "https://github.com/NeogitOrg/neogit"
     },
     "nvim-lspconfig": {
       "rev": "8e2084bf5e40c79c1f42210a6ef96a0a4793a763",
